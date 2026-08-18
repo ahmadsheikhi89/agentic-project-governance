@@ -1,0 +1,24 @@
+name: Proposal
+description: Propose a governance, adapter, profile, or specification change.
+title: "[Proposal]: "
+labels:
+  - proposal
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem should APG solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility impact
+      description: Does this change precedence, authority, inheritance, manifest semantics, or vendor neutrality?

@@ -1,0 +1,34 @@
+spec_version: "1.0"
+
+project:
+  definition: "PROJECT.md"
+  version_file: "VERSION"
+
+governance:
+  root: "GOVERNANCE.md"
+  entrypoint: "AGENTS.md"
+
+resolution:
+  instruction_file: "AGENTS.md"
+  inheritance: "root-to-leaf"
+  local_rules_may:
+    - specialize
+    - restrict
+  local_rules_may_not:
+    - silently_weaken_parent_policy
+    - bypass_required_approval
+    - bypass_security_controls
+
+directories:
+  policies: ".governance/policies"
+  workflows: ".governance/workflows"
+  context: ".governance/context"
+  roles: ".governance/roles"
+  templates: ".governance/templates"
+
+validation:
+  require_evidence: true
+  allow_unvalidated_claims: false
+
+release:
+  current: "1.0.0"
