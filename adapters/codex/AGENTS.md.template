@@ -1,0 +1,10 @@
+# Codex Adapter
+
+Read and follow the repository APG contract:
+
+1. `/GOVERNANCE.md`
+2. `/PROJECT.md`
+3. applicable root-to-leaf `AGENTS.md`
+4. referenced policies, workflow, role, and context
+
+Do not duplicate canonical policy in this adapter.
