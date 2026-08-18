@@ -1,0 +1,12 @@
+# Claude Code Adapter
+
+This repository uses Agentic Project Governance (APG).
+
+Read:
+
+- `/GOVERNANCE.md`
+- `/PROJECT.md`
+- applicable scoped instructions
+- only the policies, workflow, role, and context relevant to the current task
+
+Canonical project governance remains in the APG files, not in this adapter.

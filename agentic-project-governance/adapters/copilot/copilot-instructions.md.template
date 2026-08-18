@@ -1,0 +1,12 @@
+# GitHub Copilot Adapter
+
+This project follows Agentic Project Governance (APG).
+
+Canonical project rules live in:
+
+- `GOVERNANCE.md`
+- `PROJECT.md`
+- `.governance/`
+- scoped `AGENTS.md` files
+
+Do not treat this adapter as an independent policy source.
