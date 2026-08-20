@@ -1,11 +1,15 @@
 # Gemini CLI Adapter
 
-Use the APG repository contract as the canonical project context.
+Use the APG repository contract as the canonical governance source.
 
 Start with:
 
 - `/GOVERNANCE.md`
-- `/PROJECT.md`
+- `/.governance/manifest.yaml`
 - applicable scoped instructions
 
-Resolve policies and workflow from `/.governance/` as required by the task.
+Resolve authoritative project sources and applicable policies from the manifest for the current task.
+
+Do not assume `PROJECT.md` exists unless the manifest declares it as a project source.
+
+Do not treat this adapter as an independent policy source.

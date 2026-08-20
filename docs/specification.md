@@ -31,27 +31,25 @@ APG یک مدل هوش مصنوعی، Agent Runtime یا ابزار اجرای �
 
 APG یک **قرارداد داخل Repository** است. این قرارداد به انسان و AI توضیح می‌دهد:
 
-- این پروژه چیست؛
+- منابع معتبر برای فهم پروژه کجاست؛
 - چه قواعدی دارد؛
 - چه اطلاعاتی معتبر است؛
 - چه کسی اختیار تصمیم یا اجرا دارد؛
-- برای هر نوع کار چه Workflowای باید طی شود؛
+- در صورت تعریف Workflow، چه رویه‌ای برای Scope فعلی اعمال می‌شود؛
 - نتیجه با چه Evidenceای معتبر محسوب می‌شود؛
 - و در پایان چه چیزی باید تحویل داده شود.
 
 خلاصه ایده:
 
 ```text
-Project
-├── Governance
-├── Project Definition
-├── Scoped Instructions
-├── Policies
-├── Workflows
-├── Context
-├── Roles
-├── Validation
-└── Tool Adapters
+Existing Project
+├── Authoritative Project Sources
+└── APG Governance Layer
+    ├── Governance
+    ├── Manifest / Source Resolution
+    ├── Authority
+    ├── Validation / Evidence
+    └── Tool Adapters
 ```
 
 **ابزار AI ممکن است عوض شود؛ قرارداد پروژه باید پایدار بماند.**
@@ -65,7 +63,7 @@ Project
 | جزء | نقش |
 |---|---|
 | `GOVERNANCE.md` | قانون اساسی پروژه |
-| `PROJECT.md` | شناسنامه پروژه و محدوده آن |
+| Project Sources / optional `PROJECT.md` | منابع معتبر پروژه؛ `PROJECT.md` فقط در صورت نیاز |
 | `AGENTS.md` | نقطه ورود و Router |
 | `Policies` | قواعد و محدودیت‌های لازم‌الاجرا |
 | `Workflows` | روش استاندارد انجام کار |
@@ -421,61 +419,49 @@ Ruleهای نمونه:
 
 برای شروع، کل Reference Repository را Copy نکنید.
 
-یک پروژه کوچک فقط به چند فایل اصلی نیاز دارد.
+یک پروژه مصرف‌کننده فقط Core موردنیاز APG را اضافه می‌کند و منابع معتبر موجود پروژه را از طریق Manifest معرفی می‌کند.
 
-## 3.1 `PROJECT.md`
-
-در این فایل بنویسید:
-
-- پروژه چیست؛
-- چه خروجی‌ای دارد؛
-- مالک آن کیست؛
-- Dependencyهای اصلی چیست؛
-- چه چیزی خارج از Scope است.
-
-## 3.2 `GOVERNANCE.md`
-
-در این فایل مشخص کنید:
-
-- AI بدون Approval چه کاری می‌تواند انجام دهد؛
-- چه کاری نیاز به Human Approval دارد؛
-- چه کاری ممنوع است؛
-- چه Ruleهایی قابل Override نیستند؛
-- نتیجه برای Accepted شدن به چه Evidenceای نیاز دارد.
-
-## 3.3 `AGENTS.md`
-
-این فایل Entry Point است.
-
-وظیفه‌اش این است که Agent را به Governance، Project Definition و Scoped Instructions هدایت کند.
-
-**همه دانش پروژه را داخل این فایل نریزید.**
-
-## 3.4 حداقل Governance
-
-```text
-.governance/
-├── manifest.yaml
-├── policies/
-│   └── validation.md
-└── workflows/
-    └── default.md
-```
-
-## 3.5 Scope محلی فقط در صورت نیاز
+## 3.1 حداقل Core
 
 ```text
 project/
 ├── AGENTS.md
-├── frontend/
-│   └── AGENTS.md
-├── backend/
-│   └── AGENTS.md
-└── infrastructure/
-    └── AGENTS.md
+├── GOVERNANCE.md
+└── .governance/
+    ├── manifest.yaml
+    └── policies/
+        ├── authority.md
+        └── validation.md
 ```
 
-هر Child فقط Ruleهای مخصوص همان Subtree را اضافه می‌کند.
+## 3.2 منابع معتبر پروژه
+
+APG پروژه را مجبور نمی‌کند اطلاعات موجود را دوباره داخل ساختار خودش Copy کند. `README.md`، Architecture Docs، Specs، Runbooks، `VERSION` و Service Catalogها می‌توانند همان‌جایی که هستند باقی بمانند و Manifest آن‌ها را Reference کند.
+
+`PROJECT.md` اختیاری است. اگر یک Summary مستقل برای پروژه مفید باشد می‌توان از آن استفاده کرد؛ در غیر این صورت Sourceهای معتبر موجود باید Reference شوند.
+
+### `AGENTS.md`
+
+این فایل Entry Point و Router است. Agent را به Governance، Manifest، Scoped Instructions و منابع معتبر مرتبط با Task هدایت می‌کند.
+
+**همه دانش پروژه را داخل این فایل نریزید.**
+
+### Optional Extensions
+
+فقط در صورت نیاز اضافه شوند:
+
+```text
+.governance/workflows/
+.governance/context/
+.governance/roles/
+.governance/templates/
+additional policies
+profiles
+```
+
+## 3.5 Scope محلی فقط در صورت نیاز
+
+Child scope می‌تواند Ruleهای والد را تخصصی‌تر یا محدودتر کند، ولی نباید Protected Governance والد را silently weaken کند.
 
 ---
 
@@ -576,13 +562,11 @@ APG ادعا نمی‌کند `AGENTS.md`، Hierarchical Instructions یا Agent 
 
 ```text
 Governance
-+ Project Definition
-+ Hierarchical Instructions
-+ Policies
-+ Workflows
-+ Context
-+ Roles
-+ Evidence / Validation
++ Manifest / Authoritative Source Resolution
++ Authority
++ Scoped Instructions
++ Validation / Evidence
++ Optional Extensions
 + Thin Vendor Adapters
 = Project Governance Contract
 ```
@@ -590,6 +574,8 @@ Governance
 ---
 
 # 6. ساختار Reference Repository
+
+این Tree مربوط به **Reference Repository خود APG** است و شامل Core، Documentation و Optional Extensions می‌شود؛ پروژه مصرف‌کننده نباید کل آن را Copy کند.
 
 ```text
 agentic-project-governance/
@@ -721,25 +707,11 @@ Entry Point و Router است.
 
 ## 7.4 `PROJECT.md`
 
-تعریف پایدار پروژه است:
+`PROJECT.md` یک **Project Source اختیاری** است، نه یک Requirement عمومی APG.
 
-```text
-Project Name
-Purpose
-Problem Domain
-Primary Users
-Project Type
-Criticality
-Technology / Platform
-Repository Boundaries
-External Dependencies
-Environment Model
-Data Sensitivity
-Deployment / Delivery Model
-Owners
-Known Constraints
-Explicit Non-Goals
-```
+اگر پروژه از قبل Sourceهای معتبری مثل `README.md`، Architecture Docs، Specs، Runbooks یا Version files دارد، Manifest باید همان Sourceها را Reference کند.
+
+وقتی یک Summary مستقل و پایدار برای پروژه مفید است، `PROJECT.md` می‌تواند استفاده شود. اطلاعات سریع‌التغییر بهتر است در Source مناسب خود پروژه یا Context helper اختیاری مربوط نگهداری شود.
 
 ---
 
@@ -754,16 +726,19 @@ Explicit Non-Goals
 ```yaml
 spec_version: "1.0"
 
-project:
-  definition: "PROJECT.md"
-
 governance:
   root: "GOVERNANCE.md"
-  entrypoint: "AGENTS.md"
+  entry_adapter: "AGENTS.md"
+
+project_sources:
+  overview:
+    - "README.md"
 
 resolution:
   instruction_file: "AGENTS.md"
   inheritance: "root-to-leaf"
+  source_strategy: "declared-authoritative-sources"
+  context_strategy: "task-relevant-only"
   local_rules_may:
     - specialize
     - restrict
@@ -771,8 +746,13 @@ resolution:
     - silently_weaken_parent_policy
     - bypass_required_approval
     - bypass_security_controls
+    - replace_authoritative_sources_without_governance_change
 
-directories:
+core:
+  authority_policy: ".governance/policies/authority.md"
+  validation_policy: ".governance/policies/validation.md"
+
+extensions:
   policies: ".governance/policies"
   workflows: ".governance/workflows"
   context: ".governance/context"
@@ -814,6 +794,8 @@ PRODUCTION_CHANGE
 ---
 
 # 10. Workflows
+
+Workflow یک Extension اختیاری APG است و فقط در صورت نیاز پروژه اضافه می‌شود.
 
 Workflow می‌گوید **کار با چه ترتیب استانداردی انجام شود**.
 
@@ -872,6 +854,8 @@ Determine Review Scope
 
 # 11. Context
 
+Context helper اختیاری است؛ APG باید منابع معتبر پروژه را Resolve کند، نه اینکه Project Knowledge را داخل خودش کپی کند.
+
 Context شامل **اطلاعات لازم برای فهم پروژه** است، نه Rule.
 
 نمونه:
@@ -886,6 +870,8 @@ Context شامل **اطلاعات لازم برای فهم پروژه** است،
 ---
 
 # 12. Roles
+
+Role یک Extension اختیاری برای Responsibility Guidance است و جای Authority را نمی‌گیرد.
 
 Role حدود مسئولیت را مشخص می‌کند.
 
@@ -915,6 +901,8 @@ Role قرار نیست یک Persona نمایشی بسازد.
 ---
 
 # 13. Templates
+
+Templateها Extension اختیاری برای خروجی‌های تکراری هستند و جزء Core اجباری APG نیستند.
 
 Templateها برای خروجی‌های تکراری استفاده می‌شوند.
 
@@ -2187,90 +2175,51 @@ Again, no software code is required for APG to be useful.
 
 ## 1.10 What a New User Actually Does
 
-A first-time user should not copy the entire APG reference repository into their project.
+Do not copy the full reference repository into a consuming project.
 
-Start with five steps.
+A consuming project should install only the APG core it needs and declare its existing authoritative project sources through the manifest.
 
-### Step 1 — Describe the project
-
-Create:
-
-```text
-PROJECT.md
-```
-
-Write:
-
-```text
-What is this project?
-What does it produce?
-Who uses it?
-Who owns it?
-What systems or processes does it depend on?
-What is explicitly out of scope?
-```
-
-### Step 2 — Define authority and non-negotiable rules
-
-Create:
-
-```text
-GOVERNANCE.md
-```
-
-Write:
-
-```text
-What may an AI agent do without approval?
-What requires human approval?
-What must never happen?
-What rules cannot be overridden by a local instruction?
-What evidence is required before work is accepted?
-```
-
-### Step 3 — Add the entry point
-
-Create:
-
-```text
-AGENTS.md
-```
-
-Its job is to route the agent to the canonical project contract and applicable scoped instructions.
-
-Do not put the entire project into this file.
-
-### Step 4 — Add only the governance components you need
-
-For a small project:
-
-```text
-.governance/
-├── manifest.yaml
-├── policies/
-│   └── validation.md
-└── workflows/
-    └── default.md
-```
-
-Add more only when the project actually needs them.
-
-### Step 5 — Add scoped instructions when the project grows
-
-Example:
+### Minimal Core
 
 ```text
 project/
 ├── AGENTS.md
-├── frontend/
-│   └── AGENTS.md
-├── backend/
-│   └── AGENTS.md
-└── infrastructure/
-    └── AGENTS.md
+├── GOVERNANCE.md
+└── .governance/
+    ├── manifest.yaml
+    └── policies/
+        ├── authority.md
+        └── validation.md
 ```
 
-Each child file explains only what is different in that subtree.
+### Authoritative Project Sources
+
+APG does not require a project to duplicate existing project knowledge under APG directories. README files, architecture documentation, specifications, runbooks, version files, and service catalogs may remain where they already live.
+
+`PROJECT.md` is optional. Use it when a single stable project summary is useful; otherwise reference existing authoritative project-native sources.
+
+### `AGENTS.md`
+
+This file is the entry point and router. It directs an agent to governance, the manifest, scoped instructions, and authoritative project sources relevant to the task.
+
+Do not turn it into a dump of the complete project knowledge base.
+
+### Optional Extensions
+
+Add only when needed:
+
+```text
+.governance/workflows/
+.governance/context/
+.governance/roles/
+.governance/templates/
+additional policies
+profiles
+```
+
+### Local Scope Only When Needed
+
+A child scope may specialize or restrict parent guidance but must not silently weaken protected parent governance.
 
 ---
 
@@ -2407,7 +2356,7 @@ Each category answers a different question:
 | Category | Question |
 |---|---|
 | Governance | Who has authority and what rules cannot be violated? |
-| Project Definition | What is this project and what are its boundaries? |
+| Project Sources | Where do authoritative project facts live? |
 | Policy | What constraints apply? |
 | Workflow | How should a class of work be performed? |
 | Context | What facts must be known? |
@@ -2513,13 +2462,11 @@ The following architecture is an APG design decision rather than a vendor standa
 
 ```text
 Governance
-+ Project Definition
-+ Hierarchical Instructions
-+ Policies
-+ Workflows
-+ Context
-+ Roles
-+ Evidence/Validation
++ Manifest / Authoritative Source Resolution
++ Authority
++ Scoped Instructions
++ Validation / Evidence
++ Optional Extensions
 + Thin Vendor Adapters
 = Project Governance Contract
 ```
@@ -2527,6 +2474,8 @@ Governance
 ---
 
 # 7. Repository Structure
+
+This tree describes the **APG reference repository**, including core files, documentation, examples, and optional extensions. It is not the mandatory installation tree for consuming projects.
 
 The v1.0 public reference repository is:
 
@@ -2716,39 +2665,11 @@ What happens when required evidence is unavailable?
 
 ## 8.4 `PROJECT.md`
 
-### Purpose
+`PROJECT.md` is an **optional project source**, not a universal APG requirement.
 
-Stable definition of the project itself.
+If a project already has authoritative README files, architecture documentation, specifications, runbooks, version files, or service catalogs, the manifest should reference those existing sources.
 
-### Contains
-
-```text
-Project Name
-Purpose
-Problem Domain
-Primary Users
-Project Type
-Criticality
-Technology / Platform
-Repository Boundaries
-External Dependencies
-Environment Model
-Data Sensitivity
-Deployment / Delivery Model
-Owners
-Known Constraints
-Explicit Non-Goals
-```
-
-### Must avoid
-
-Highly volatile runtime status.
-
-Fast-changing state belongs in scoped context such as:
-
-```text
-.governance/context/current-state.md
-```
+Use `PROJECT.md` when a single stable project summary is useful. Highly volatile state should remain in the appropriate project-native source or an optional scoped context helper.
 
 ---
 
@@ -2831,16 +2752,19 @@ Provide a small stable index that tools can validate without parsing every Markd
 ```yaml
 spec_version: "1.0"
 
-project:
-  definition: "PROJECT.md"
-
 governance:
   root: "GOVERNANCE.md"
-  entrypoint: "AGENTS.md"
+  entry_adapter: "AGENTS.md"
+
+project_sources:
+  overview:
+    - "README.md"
 
 resolution:
   instruction_file: "AGENTS.md"
   inheritance: "root-to-leaf"
+  source_strategy: "declared-authoritative-sources"
+  context_strategy: "task-relevant-only"
   local_rules_may:
     - specialize
     - restrict
@@ -2848,8 +2772,13 @@ resolution:
     - silently_weaken_parent_policy
     - bypass_required_approval
     - bypass_security_controls
+    - replace_authoritative_sources_without_governance_change
 
-directories:
+core:
+  authority_policy: ".governance/policies/authority.md"
+  validation_policy: ".governance/policies/validation.md"
+
+extensions:
   policies: ".governance/policies"
   workflows: ".governance/workflows"
   context: ".governance/context"
@@ -2960,6 +2889,8 @@ Examples:
 
 # 11. Workflows
 
+Workflows are optional APG extensions. Add them only when the project needs a standardized procedure.
+
 Workflows answer:
 
 > How should this type of work normally proceed?
@@ -3046,6 +2977,8 @@ Examples:
 
 # 12. Context
 
+Context helpers are optional. Resolve authoritative project-native sources instead of warehousing project knowledge under `.governance/context/`.
+
 Context answers:
 
 > What facts does the agent need to know?
@@ -3109,6 +3042,8 @@ Agents should treat stale current-state information cautiously.
 
 # 13. Roles
 
+Roles are optional responsibility guidance and are not equivalent to authority.
+
 Roles answer:
 
 > What responsibility or review perspective applies to this task?
@@ -3170,6 +3105,8 @@ database-operator
 ---
 
 # 14. Templates
+
+Templates are optional reusable artifacts and are not part of the mandatory APG core.
 
 Templates standardize recurring artifacts without forcing a domain-specific workflow.
 

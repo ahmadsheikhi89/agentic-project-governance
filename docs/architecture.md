@@ -1,32 +1,33 @@
 # Architecture
 
-APG separates the project contract from the AI tool.
+APG is a governance layer applied to an existing or new project.
 
 ```text
-Human / Team
-    ↓
-AI Tool / Agent
-    ↓
-Tool Adapter
-    ↓
-Project Entry Point
-    ↓
-Governance Resolver
-    ├── GOVERNANCE.md
-    ├── PROJECT.md
-    ├── Scoped Instructions
-    ├── Policies
-    ├── Workflow
-    ├── Role
-    └── Context
-    ↓
-Task Execution
-    ↓
-Validation
-    ↓
-Evidence
-    ↓
-Report / Handover
+Project Facts / Existing Sources
+        │
+        ▼
+APG Manifest + Governance
+        │
+        ├── Authority
+        ├── Rule resolution
+        ├── Source resolution
+        └── Validation / Evidence
+        │
+        ▼
+Tool Adapters / Human Consumers
+        │
+        ▼
+Project Work
+        │
+        ▼
+Runtime Enforcement + Evidence
 ```
 
-The adapter is replaceable. The project contract is canonical.
+APG does not own the project's source tree, CI/CD, IaC, documentation system, or project-management process.
+
+Adapters are replaceable. The canonical governance contract is durable.
+
+See also:
+
+- [Core model](core-model.md)
+- [Adoption model](adoption-model.md)

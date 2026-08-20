@@ -1,0 +1,22 @@
+spec_version: "1.0"
+
+governance:
+  root: "GOVERNANCE.md"
+  entry_adapter: "AGENTS.md"
+
+project_sources:
+  overview:
+    - "PROJECT.md"
+
+resolution:
+  instruction_file: "AGENTS.md"
+  inheritance: "root-to-leaf"
+  source_strategy: "declared-authoritative-sources"
+
+core:
+  authority_policy: ".governance/policies/authority.md"
+  validation_policy: ".governance/policies/validation.md"
+
+validation:
+  require_evidence: true
+  allow_unvalidated_claims: false

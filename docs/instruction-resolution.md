@@ -1,20 +1,21 @@
 # Instruction Resolution
 
-Conceptual resolution for a task:
+Conceptual task resolution:
 
 ```text
 Determine task scope
 → Read root governance
-→ Read project definition
+→ Read APG manifest
 → Resolve root-to-leaf scoped instructions
 → Resolve applicable policies
-→ Select workflow
-→ Load required role
-→ Load only relevant context
+→ Resolve authoritative project sources relevant to the task
+→ Load optional workflow/role/context only when needed
 → Inspect repository evidence
-→ Perform task
+→ Perform task within authority
 → Validate
-→ Report
+→ Report evidence
 ```
 
-Native tool loading behavior may differ. APG defines project semantics above those tool-specific mechanics.
+Native AI tools may load instruction files differently. APG defines the project-level governance semantics above those vendor-specific mechanics.
+
+`PROJECT.md` is not assumed to exist unless the manifest declares it as a project source.

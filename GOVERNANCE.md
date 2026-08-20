@@ -4,7 +4,20 @@
 
 This document defines the normative governance contract for the Agentic Project Governance reference repository.
 
-## 2. Authority
+The APG framework itself is governed by this file. Consuming projects define their own governance contract when adopting APG.
+
+## 2. Core APG semantics
+
+APG exists to make four things explicit:
+
+1. authoritative project sources;
+2. applicable rules for a scope;
+3. allowed actions and approval boundaries;
+4. validation and evidence requirements.
+
+Optional workflows, roles, templates, profiles, and context helpers MUST NOT become hidden prerequisites for these core semantics.
+
+## 3. Authority
 
 Repository content may be read and analyzed without special approval.
 
@@ -12,7 +25,7 @@ Modifying, publishing, tagging, releasing, deleting, or changing the production/
 
 AI-generated proposals do not constitute approval.
 
-## 3. Protected constraints
+## 4. Protected constraints
 
 The following constraints MUST NOT be silently weakened by local instructions:
 
@@ -21,9 +34,10 @@ The following constraints MUST NOT be silently weakened by local instructions:
 - authorship and license notices;
 - validation integrity;
 - required approval boundaries;
+- canonical source resolution;
 - vendor-neutral core semantics.
 
-## 4. Instruction precedence
+## 5. Authority precedence
 
 Conceptual authority precedence:
 
@@ -34,30 +48,50 @@ External platform / security restrictions
 → Protected project policies
 → Parent scoped instructions
 → Nearest scoped instructions
-→ Applicable workflow
-→ Role guidance
+→ Applicable optional workflow
+→ Applicable optional role guidance
 → Current task
 → Framework defaults
 ```
 
 Specificity does not automatically grant greater authority.
 
-## 5. Rule specialization
+Loading order and authority precedence are separate concepts.
+
+## 6. Source resolution
+
+APG MUST NOT require a project to duplicate project facts merely to adopt governance.
+
+Authoritative project sources SHOULD be declared through the manifest and may point to existing repository artifacts such as:
+
+```text
+README.md
+architecture documents
+specifications
+runbooks
+version files
+service catalogs
+```
+
+A project-specific `PROJECT.md` MAY be used, but it is not universally required by APG.
+
+## 7. Rule specialization
 
 A child scope MAY:
 
 - add detail;
 - add stronger validation;
 - add stronger safety restrictions;
-- select a specialized workflow.
+- select a specialized optional workflow.
 
 A child scope MUST NOT silently:
 
 - remove a required approval;
 - disable security requirements;
+- replace an authoritative source without an authorized governance change;
 - redefine evidence to make failed or unperformed validation appear successful.
 
-## 6. Validation integrity
+## 8. Validation integrity
 
 A validation claim requires observable evidence.
 
@@ -65,31 +99,49 @@ A validation claim requires observable evidence.
 
 Use `NOT_VALIDATED` when work exists but the required proof is unavailable or was not executed.
 
-## 7. Security
+## 9. Security
 
 Secrets MUST NOT be committed to this repository.
 
 Governance documents may reference a secret-management mechanism but MUST NOT contain runtime credentials.
 
-## 8. Vendor neutrality
+## 10. Vendor neutrality
 
 The canonical governance model MUST remain usable without a proprietary agent runtime.
 
 Adapters MAY improve compatibility with specific tools but MUST NOT become the only location of important project rules.
 
-## 9. Change classification
+## 11. Runtime enforcement boundary
+
+APG declares governance. Runtime controls enforce it.
+
+Examples of enforcement systems include:
+
+```text
+CI/CD approval gates
+protected environments
+IAM
+RBAC
+sudo
+Kubernetes policy controls
+```
+
+A Markdown policy MUST NOT be represented as equivalent to runtime access control.
+
+## 12. Change classification
 
 Core semantic changes include:
 
-- precedence changes;
-- authority model changes;
+- authority precedence changes;
+- source-resolution changes;
 - manifest schema changes;
 - inheritance changes;
-- protected policy semantic changes.
+- validation/evidence semantics;
+- protected-policy semantic changes.
 
 Core semantic changes SHOULD include documentation, compatibility impact, and migration notes.
 
-## 10. Release governance
+## 13. Release governance
 
 Public releases use semantic versioning:
 
@@ -111,7 +163,7 @@ Release artifacts SHOULD include:
 - specification update;
 - validation report.
 
-## 11. Ownership
+## 14. Ownership
 
 Initial Author & Maintainer:
 

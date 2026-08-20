@@ -2,11 +2,15 @@
 
 This project follows Agentic Project Governance (APG).
 
-Canonical project rules live in:
+Canonical project governance lives in:
 
 - `GOVERNANCE.md`
-- `PROJECT.md`
-- `.governance/`
-- scoped `AGENTS.md` files
+- `.governance/manifest.yaml`
+- `.governance/policies/`
+- applicable scoped instruction files
+
+Project facts are resolved from authoritative sources declared in the APG manifest.
+
+Do not assume `PROJECT.md` is mandatory.
 
 Do not treat this adapter as an independent policy source.

@@ -1,10 +1,14 @@
 # Software Profile
 
-Suggested additions:
+Optional guidance for software projects.
+
+Common additions may include:
 
 - security policy;
-- test/validation policy;
 - implementation workflow;
 - review workflow;
-- architecture context;
-- frontend/backend scoped instructions when needed.
+- architecture source references;
+- frontend/backend scoped instructions;
+- test and release evidence requirements.
+
+These are extensions to the APG core, not mandatory APG files.

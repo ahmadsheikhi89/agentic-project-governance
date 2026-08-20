@@ -6,8 +6,12 @@ usage() {
 Usage:
   init-project.sh --target PATH [--profile generic|software|devops] [--apply]
 
-Default behavior is dry-run. Files are created only with --apply.
+Default behavior is dry-run.
+Files are created only with --apply.
 Existing files are never overwritten.
+
+The bootstrap installs only the APG core.
+Profiles are optional guidance and are not copied as mandatory project files.
 EOF
 }
 
@@ -76,9 +80,10 @@ create_file() {
   echo "CREATED: $dst"
 }
 
-echo "APG bootstrap"
+echo "APG core bootstrap"
 echo "Target: $TARGET"
-echo "Profile: $PROFILE"
+echo "Profile guidance: $PROFILE"
+
 if [ "$APPLY" -eq 0 ]; then
   echo "Mode: dry-run"
 else
@@ -89,9 +94,12 @@ mkdir -p "$TARGET"
 
 create_file "$REPO_ROOT/examples/minimal/AGENTS.md" "$TARGET/AGENTS.md"
 create_file "$REPO_ROOT/examples/minimal/GOVERNANCE.md" "$TARGET/GOVERNANCE.md"
-create_file "$REPO_ROOT/examples/minimal/PROJECT.md" "$TARGET/PROJECT.md"
 create_file "$REPO_ROOT/examples/minimal/.governance/manifest.yaml" "$TARGET/.governance/manifest.yaml"
+create_file "$REPO_ROOT/examples/minimal/.governance/policies/authority.md" "$TARGET/.governance/policies/authority.md"
 create_file "$REPO_ROOT/examples/minimal/.governance/policies/validation.md" "$TARGET/.governance/policies/validation.md"
-create_file "$REPO_ROOT/examples/minimal/.governance/workflows/default.md" "$TARGET/.governance/workflows/default.md"
+
+if [ "$PROFILE" != "generic" ]; then
+  echo "INFO: optional profile guidance: $REPO_ROOT/profiles/$PROFILE/README.md"
+fi
 
 echo "DONE"

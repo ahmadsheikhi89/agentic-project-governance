@@ -3,8 +3,11 @@
 Read and follow the repository APG contract:
 
 1. `/GOVERNANCE.md`
-2. `/PROJECT.md`
+2. `/.governance/manifest.yaml`
 3. applicable root-to-leaf `AGENTS.md`
-4. referenced policies, workflow, role, and context
+4. authoritative project sources declared by the manifest and relevant to the task
+5. applicable policies and optional extensions required by the task
+
+Do not assume `PROJECT.md` exists unless the manifest declares it as a project source.
 
 Do not duplicate canonical policy in this adapter.

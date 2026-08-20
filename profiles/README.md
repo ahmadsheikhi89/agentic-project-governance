@@ -1,9 +1,17 @@
 # Profiles
 
-Profiles are optional domain defaults. They do not change APG core semantics.
+Profiles are optional domain guidance bundles. They do not change APG core semantics and they are not required for adoption.
 
-Included in v1.0:
+Included reference profiles:
 
 - `generic`
 - `software`
 - `devops`
+
+The intended model is:
+
+```text
+APG Core
++
+Optional Profile Guidance
+```

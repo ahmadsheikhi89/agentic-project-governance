@@ -1,8 +1,8 @@
 # Agentic Project Governance (APG)
 
-**Vendor-neutral project governance for humans and AI agents.**
+**Repository-native governance for human and AI project work.**
 
-APG defines a repository-native contract for project rules, scoped instructions, context, authority, workflows, validation evidence, and handover.
+Agentic Project Governance (APG) is a vendor-neutral governance contract that lives inside a repository. It makes project authority, applicable rules, authoritative sources, and validation requirements explicit for humans and AI agents.
 
 **Website:** https://apg.opspro.ir/  
 **Release:** `v1.0.0`  
@@ -10,107 +10,184 @@ APG defines a repository-native contract for project rules, scoped instructions,
 
 ---
 
-## What problem does APG solve?
+## What APG is
 
-AI tools can generate code, infrastructure, documents, analysis, and business artifacts. They still need to know how *your project* works:
+APG is applied **to a project**. It is not the project itself.
+
+It answers four core questions:
 
 ```text
-What is this project?
-Which rules apply here?
-What am I allowed to do?
-What needs human approval?
-Which context is authoritative?
-Which workflow should I follow?
-How do I prove the result?
+1. What is authoritative?
+2. Which rules apply here?
+3. What is allowed?
+4. What proves the result?
 ```
 
-APG gives those answers a durable home in the repository.
+APG keeps those answers versioned with the repository so that humans and tools such as Codex, Claude Code, Gemini, or Copilot can work from the same project contract.
+
+## What APG is not
+
+APG is not:
+
+- an AI model or agent runtime;
+- a replacement for Codex, Claude Code, Gemini, or Copilot;
+- a CI/CD or infrastructure-as-code engine;
+- a project-management system;
+- a mandatory source-code generator;
+- a knowledge dump;
+- an IAM, RBAC, or security-enforcement system.
+
+Runtime tools enforce controls. APG declares the project governance contract they should operate under.
 
 ## Core model
 
 ```text
-Project
-├── Governance
-├── Project Definition
-├── Scoped Instructions
-├── Policies
-├── Workflows
-├── Context
-├── Roles
-├── Validation
-└── Tool Adapters
+Existing Project
+│
+├── source / docs / CI / IaC / runbooks / specs
+│
+└── APG governance layer
+    ├── Governance
+    ├── Authority
+    ├── Source & rule resolution
+    ├── Validation
+    └── Evidence requirements
+             │
+             ├── AGENTS.md -> Codex adapter / entry
+             ├── CLAUDE.md -> Claude adapter
+             ├── GEMINI.md -> Gemini adapter
+             └── other consumers
 ```
 
-The AI tool is replaceable. The project contract is durable.
+The project remains the source of its own project facts. APG points to authoritative project sources instead of requiring them to be duplicated under APG directories.
 
-## Start small
+## Minimal adoption
 
-A consuming project does **not** need the entire reference repository.
+A consuming project does **not** need the full reference repository.
+
+A minimal APG installation can be:
 
 ```text
 my-project/
 ├── AGENTS.md
 ├── GOVERNANCE.md
-├── PROJECT.md
 └── .governance/
     ├── manifest.yaml
-    ├── policies/
-    │   └── validation.md
-    └── workflows/
-        └── default.md
+    └── policies/
+        ├── authority.md
+        └── validation.md
 ```
 
-Add scoped `AGENTS.md`, policies, workflows, roles, and context only when the project actually needs them.
+`AGENTS.md` is an adapter/router for agent tools. The canonical governance remains in the APG contract.
 
-## Domains
+`PROJECT.md` is **not mandatory** for consuming projects. If a project already has `README.md`, architecture documentation, specifications, runbooks, or other authoritative sources, the manifest can reference those existing files.
 
-The same governance model can be used for:
+## Brownfield first
 
-- DevOps and infrastructure automation
-- software engineering
-- platform engineering and SRE
-- human resources
-- industrial engineering
-- business operations
-- data and analytics
-- research and documentation
-- security, compliance, product, and other structured project work
+APG should work on an existing repository without forcing a reorganization.
+
+Example:
+
+```text
+existing-project/
+├── README.md
+├── docs/
+├── src/
+├── .gitlab-ci.yml
+├── runbooks/
+├── AGENTS.md
+├── GOVERNANCE.md
+└── .governance/
+    ├── manifest.yaml
+    └── policies/
+```
+
+APG governs work on that repository. It does not replace its source tree, documentation model, CI/CD, or project-management workflow.
+
+## Core vs optional extensions
+
+**Core:**
+
+- governance semantics;
+- authority;
+- source and rule resolution;
+- validation;
+- evidence requirements;
+- manifest/index.
+
+**Optional extensions:**
+
+- additional policies;
+- workflows;
+- context helpers;
+- roles;
+- templates;
+- profiles;
+- generators and validators.
+
+The reference repository includes optional material because it demonstrates the framework. A consuming project only adopts what it needs.
+
+## Codex and other agents
+
+For Codex, `AGENTS.md` acts as the repository entry/router:
+
+```text
+Codex
+  ↓
+AGENTS.md
+  ↓
+GOVERNANCE.md + .governance/manifest.yaml
+  ↓
+Applicable scoped instructions
+  ↓
+Relevant authoritative project sources
+  ↓
+Applicable policies / validation
+```
+
+Other tools use thin adapters that point to the same canonical APG contract.
+
+## Validation integrity
+
+APG separates a result from proof of that result.
+
+Recommended status vocabulary:
+
+```text
+PASS
+FAIL
+BLOCKED
+NO_CHANGE
+NOT_VALIDATED
+```
+
+`PASS` is valid only when the required validation actually ran and succeeded.
 
 ## Documentation
 
+- [Core model](docs/core-model.md)
+- [Adoption model](docs/adoption-model.md)
 - [Bilingual specification](docs/specification.md)
 - [Architecture](docs/architecture.md)
 - [Governance model](docs/governance-model.md)
 - [Instruction resolution](docs/instruction-resolution.md)
+- [Adapter model](docs/adapter-model.md)
 - [Authoring guide](docs/authoring-guide.md)
-- [GitHub Pages + cPanel publishing guide](docs/publishing-github-pages.md)
 - [Prior art](docs/prior-art.md)
 
 ## Public website
 
-The static website is published from:
+The documentation website is published from:
 
 ```text
 main:/docs
 ```
 
-with the custom domain:
+Custom domain:
 
 ```text
-apg.opspro.ir
+https://apg.opspro.ir/
 ```
-
-The website is self-contained HTML5 with Persian/English language switching and light/dark themes.
-
-## Release
-
-Current release:
-
-```text
-v1.0.0
-```
-
-See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 

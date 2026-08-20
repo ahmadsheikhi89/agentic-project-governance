@@ -5,8 +5,11 @@ This repository uses Agentic Project Governance (APG).
 Read:
 
 - `/GOVERNANCE.md`
-- `/PROJECT.md`
+- `/.governance/manifest.yaml`
 - applicable scoped instructions
-- only the policies, workflow, role, and context relevant to the current task
+- authoritative project sources declared by the manifest and relevant to the task
+- only the policies and optional extensions required by the current task
 
-Canonical project governance remains in the APG files, not in this adapter.
+Do not assume `PROJECT.md` exists unless it is declared as a project source.
+
+Canonical project governance remains in the APG contract, not in this adapter.

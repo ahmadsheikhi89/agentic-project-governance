@@ -1,13 +1,25 @@
 # Extension Model
 
-APG can be extended through:
+APG can be extended without expanding the mandatory core.
 
-- profiles;
-- policies;
+Optional extension categories include:
+
+- additional policies;
 - workflows;
 - roles;
-- context templates;
-- adapters;
-- domain examples.
+- context helpers;
+- templates;
+- profiles;
+- tool adapters;
+- generators;
+- validation/reporting tooling.
 
-Extensions must preserve the core authority, inheritance, evidence, and vendor-neutrality semantics.
+Extensions must preserve:
+
+- authority semantics;
+- source-resolution semantics;
+- protected inheritance;
+- validation/evidence integrity;
+- vendor neutrality.
+
+The existence of an extension directory in the reference repository does not make it mandatory for consuming projects.

@@ -1,11 +1,15 @@
 # DevOps Profile
 
-Suggested additions:
+Optional guidance for infrastructure, platform, and operations projects.
 
-- authority policy;
+Common additions may include:
+
 - change-control policy;
 - security policy;
-- validation policy;
-- canary/implementation workflow;
-- environment and architecture context;
-- explicit production approval boundaries.
+- deployment/rollback workflow;
+- environment source references;
+- architecture/runbook source references;
+- explicit production approval boundaries;
+- operational evidence requirements.
+
+These are extensions to the APG core, not mandatory APG files.

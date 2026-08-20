@@ -1,16 +1,27 @@
 spec_version: "1.0"
 
-project:
-  definition: "PROJECT.md"
-  version_file: "VERSION"
-
 governance:
   root: "GOVERNANCE.md"
-  entrypoint: "AGENTS.md"
+  entry_adapter: "AGENTS.md"
+
+project_sources:
+  overview:
+    - "README.md"
+    - "PROJECT.md"
+  architecture:
+    - "docs/architecture.md"
+  specification:
+    - "docs/specification.md"
+  current_state:
+    - ".governance/context/current-state.md"
+  version:
+    - "VERSION"
 
 resolution:
   instruction_file: "AGENTS.md"
   inheritance: "root-to-leaf"
+  source_strategy: "declared-authoritative-sources"
+  context_strategy: "task-relevant-only"
   local_rules_may:
     - specialize
     - restrict
@@ -18,8 +29,13 @@ resolution:
     - silently_weaken_parent_policy
     - bypass_required_approval
     - bypass_security_controls
+    - replace_authoritative_sources_without_governance_change
 
-directories:
+core:
+  authority_policy: ".governance/policies/authority.md"
+  validation_policy: ".governance/policies/validation.md"
+
+extensions:
   policies: ".governance/policies"
   workflows: ".governance/workflows"
   context: ".governance/context"

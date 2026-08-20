@@ -1,57 +1,75 @@
-# Project Definition
+# APG Reference Repository
 
-## Project
+## Repository identity
 
 **Name:** Agentic Project Governance  
 **Short name:** APG  
-**Version:** 1.0.0  
+**Release:** 1.0.0
 **Website:** https://apg.opspro.ir/  
 **Repository:** https://github.com/ahmadsheikhi89/agentic-project-governance  
 **Initial Author & Maintainer:** Ahmad Sheikhi — Senior DevOps Engineer
 
-## Purpose
+## Purpose of this repository
 
-Define a vendor-neutral, repository-native governance model for structured collaboration between humans and AI agents.
+This repository is the **APG reference repository**. It contains the APG governance specification, reference implementation, examples, optional extensions, adapters, tooling, and public documentation.
 
-## Problem domain
+This file describes the APG reference repository itself.
 
-AI-assisted project execution, project governance, context organization, authority boundaries, validation evidence, instruction scoping, and tool compatibility.
+It does **not** mean that every project adopting APG must create a `PROJECT.md`.
 
-## Primary users
-
-- individual engineers and professionals;
-- software and infrastructure teams;
-- operations teams;
-- organizations adopting AI-assisted work;
-- maintainers building reusable project templates.
-
-## Outputs
-
-- governance specification;
-- reference repository structure;
-- reusable policies and workflows;
-- vendor adapters;
-- domain profiles;
-- examples;
-- validation and bootstrap tooling;
-- static bilingual documentation website.
-
-## Runtime model
-
-APG has no mandatory runtime dependency.
-
-The canonical formats are:
+Consuming projects may use their existing authoritative sources, such as:
 
 ```text
-Markdown
-YAML
-HTML5
-POSIX-style shell tooling
+README.md
+docs/architecture.md
+specs/
+runbooks/
+VERSION
+product documentation
+service catalogs
 ```
+
+The APG manifest should point to the project sources that are authoritative for that repository.
+
+## APG purpose
+
+APG defines a vendor-neutral, repository-native governance contract for structured collaboration between humans and AI agents.
+
+Its core responsibilities are:
+
+- identify authoritative project sources;
+- resolve applicable governance and scoped instructions;
+- make authority boundaries explicit;
+- define validation and evidence requirements.
+
+## Reference repository contents
+
+This repository intentionally contains more than a minimal APG installation:
+
+- specification and website;
+- adapters;
+- profiles;
+- examples;
+- optional workflows, roles, context helpers, and templates;
+- validation/bootstrap tooling.
+
+A consuming project should adopt only what it needs.
+
+## Non-goals
+
+APG is not:
+
+- an AI model;
+- an agent orchestrator;
+- a project-management framework;
+- a CI/CD engine;
+- an infrastructure-as-code engine;
+- an IAM/RBAC replacement;
+- a mandatory generation system.
 
 ## Public website
 
-GitHub Pages publishing source:
+GitHub Pages source:
 
 ```text
 main:/docs
@@ -62,27 +80,6 @@ Custom domain:
 ```text
 apg.opspro.ir
 ```
-
-## Constraints
-
-- vendor-neutral core;
-- no secrets;
-- plain-text portability;
-- evidence-based validation;
-- minimal consuming-project footprint;
-- tool-specific adapters remain thin.
-
-## Non-goals
-
-APG is not:
-
-- an AI model;
-- an agent orchestrator;
-- a vector database;
-- a memory server;
-- a replacement for IAM;
-- a replacement for CI/CD;
-- a replacement for organizational security or change-management controls.
 
 ## License
 

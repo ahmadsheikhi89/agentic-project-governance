@@ -1,29 +1,22 @@
 # Release v1.0.0
 
-Recommended first public release commands after creating the empty GitHub repository:
+The public `v1.0.0` tag should point to the validated APG v1.0 core model.
+
+Recommended local release sequence after all changes are committed and pushed:
 
 ```bash
-git init
-git branch -M main
-git add .
-git commit -m "release: APG v1.0.0"
+./tools/validate-project.sh .
+git status -sb
+git rev-parse HEAD
+```
+
+Create the annotated tag only after validation:
+
+```bash
 git tag -a v1.0.0 -m "Agentic Project Governance v1.0.0"
-git remote add origin https://github.com/ahmadsheikhi89/agentic-project-governance.git
-git push -u origin main
 git push origin v1.0.0
 ```
 
-Before committing, verify your Git identity:
+If replacing an earlier pre-launch `v1.0.0`, delete the old GitHub Release and old local/remote tag before creating the replacement tag.
 
-```bash
-git config user.name
-git config user.email
-```
-
-Expected author name:
-
-```text
-Ahmad Sheikhi
-```
-
-Use an email address associated with your GitHub account so GitHub can attribute the commit correctly.
+Do not move or recreate the tag until the corrected `main` commit is final and validated.

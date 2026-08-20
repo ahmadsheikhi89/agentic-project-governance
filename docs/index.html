@@ -360,25 +360,23 @@ body.theme-dark .theme-toggle{
 <p>APG یک مدل هوش مصنوعی، Agent Runtime یا ابزار اجرای خودکار نیست.</p>
 <p>APG یک <strong>قرارداد داخل Repository</strong> است. این قرارداد به انسان و AI توضیح می‌دهد:</p>
 <ul>
-<li>این پروژه چیست؛</li>
+<li>منابع معتبر برای فهم پروژه کجاست؛</li>
 <li>چه قواعدی دارد؛</li>
 <li>چه اطلاعاتی معتبر است؛</li>
 <li>چه کسی اختیار تصمیم یا اجرا دارد؛</li>
-<li>برای هر نوع کار چه Workflowای باید طی شود؛</li>
+<li>در صورت تعریف Workflow، چه رویه‌ای برای Scope فعلی اعمال می‌شود؛</li>
 <li>نتیجه با چه Evidenceای معتبر محسوب می‌شود؛</li>
 <li>و در پایان چه چیزی باید تحویل داده شود.</li>
 </ul>
 <p>خلاصه ایده:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Project
-├── Governance
-├── Project Definition
-├── Scoped Instructions
-├── Policies
-├── Workflows
-├── Context
-├── Roles
-├── Validation
-└── Tool Adapters
+<pre class="code-block" dir="ltr"><code class="language-text">Existing Project
+├── Authoritative Project Sources
+└── APG Governance Layer
+    ├── Governance
+    ├── Manifest / Source Resolution
+    ├── Authority
+    ├── Validation / Evidence
+    └── Tool Adapters
 </code></pre>
 <p><strong>ابزار AI ممکن است عوض شود؛ قرارداد پروژه باید پایدار بماند.</strong></p>
 <hr/>
@@ -397,8 +395,8 @@ body.theme-dark .theme-toggle{
 <td>قانون اساسی پروژه</td>
 </tr>
 <tr>
-<td><code>PROJECT.md</code></td>
-<td>شناسنامه پروژه و محدوده آن</td>
+<td>Project Sources / optional <code>PROJECT.md</code></td>
+<td>منابع معتبر پروژه؛ <code>PROJECT.md</code> فقط در صورت نیاز</td>
 </tr>
 <tr>
 <td><code>AGENTS.md</code></td>
@@ -739,48 +737,21 @@ body.theme-dark .theme-toggle{
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-3-کاربر-جدید-از-کجا-شروع-کند؟">3. کاربر جدید از کجا شروع کند؟<a class="heading-anchor" href="#fa-3-کاربر-جدید-از-کجا-شروع-کند؟">#</a></h2>
 <p>برای شروع، کل Reference Repository را Copy نکنید.</p>
-<p>یک پروژه کوچک فقط به چند فایل اصلی نیاز دارد.</p>
-<h3 class="subsection-title anchor-heading" id="fa-31-projectmd">3.1 <code>PROJECT.md</code><a class="heading-anchor" href="#fa-31-projectmd">#</a></h3>
-<p>در این فایل بنویسید:</p>
-<ul>
-<li>پروژه چیست؛</li>
-<li>چه خروجی‌ای دارد؛</li>
-<li>مالک آن کیست؛</li>
-<li>Dependencyهای اصلی چیست؛</li>
-<li>چه چیزی خارج از Scope است.</li>
-</ul>
-<h3 class="subsection-title anchor-heading" id="fa-32-governancemd">3.2 <code>GOVERNANCE.md</code><a class="heading-anchor" href="#fa-32-governancemd">#</a></h3>
-<p>در این فایل مشخص کنید:</p>
-<ul>
-<li>AI بدون Approval چه کاری می‌تواند انجام دهد؛</li>
-<li>چه کاری نیاز به Human Approval دارد؛</li>
-<li>چه کاری ممنوع است؛</li>
-<li>چه Ruleهایی قابل Override نیستند؛</li>
-<li>نتیجه برای Accepted شدن به چه Evidenceای نیاز دارد.</li>
-</ul>
-<h3 class="subsection-title anchor-heading" id="fa-33-agentsmd">3.3 <code>AGENTS.md</code><a class="heading-anchor" href="#fa-33-agentsmd">#</a></h3>
-<p>این فایل Entry Point است.</p>
-<p>وظیفه‌اش این است که Agent را به Governance، Project Definition و Scoped Instructions هدایت کند.</p>
-<p><strong>همه دانش پروژه را داخل این فایل نریزید.</strong></p>
-<h3 class="subsection-title anchor-heading" id="fa-34-حداقل-governance">3.4 حداقل Governance<a class="heading-anchor" href="#fa-34-حداقل-governance">#</a></h3>
-<pre class="code-block" dir="ltr"><code class="language-text">.governance/
-├── manifest.yaml
-├── policies/
-│   └── validation.md
-└── workflows/
-    └── default.md
-</code></pre>
-<h3 class="subsection-title anchor-heading" id="fa-35-scope-محلی-فقط-در-صورت-نیاز">3.5 Scope محلی فقط در صورت نیاز<a class="heading-anchor" href="#fa-35-scope-محلی-فقط-در-صورت-نیاز">#</a></h3>
+<p>یک پروژه مصرف‌کننده فقط Core موردنیاز APG را اضافه می‌کند و منابع معتبر موجود پروژه را از طریق Manifest معرفی می‌کند.</p>
+<h3 class="subsection-title anchor-heading" id="fa-31-minimal-core">3.1 Minimal Core<a class="heading-anchor" href="#fa-31-minimal-core">#</a></h3>
 <pre class="code-block" dir="ltr"><code class="language-text">project/
 ├── AGENTS.md
-├── frontend/
-│   └── AGENTS.md
-├── backend/
-│   └── AGENTS.md
-└── infrastructure/
-    └── AGENTS.md
+├── GOVERNANCE.md
+└── .governance/
+    ├── manifest.yaml
+    └── policies/
+        ├── authority.md
+        └── validation.md
 </code></pre>
-<p>هر Child فقط Ruleهای مخصوص همان Subtree را اضافه می‌کند.</p>
+<p><code>PROJECT.md</code> اختیاری است. Manifest باید Sourceهای معتبر موجود پروژه را Reference کند.</p>
+<h3 class="subsection-title anchor-heading" id="fa-33-agentsmd">3.3 <code>AGENTS.md</code><a class="heading-anchor" href="#fa-33-agentsmd">#</a></h3>
+<p>این فایل Entry Point و Router است و Agent را به Governance، Manifest، Scoped Instructions و منابع معتبر مرتبط با Task هدایت می‌کند.</p>
+<p><strong>Optional Extensions:</strong> Workflows، Context helpers، Roles، Templates، Additional Policies و Profiles فقط در صورت نیاز اضافه می‌شوند.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-4-اصول-طراحی">4. اصول طراحی<a class="heading-anchor" href="#fa-4-اصول-طراحی">#</a></h2>
 <h3 class="subsection-title anchor-heading" id="fa-41-repository-منبع-حقیقت-است">4.1 Repository منبع حقیقت است<a class="heading-anchor" href="#fa-41-repository-منبع-حقیقت-است">#</a></h3>
@@ -888,13 +859,11 @@ body.theme-dark .theme-toggle{
 <h4 class="anchor-heading minor-title" id="fa-چیزی-که-apg-اضافه-میکند">چیزی که APG اضافه می‌کند<a class="heading-anchor" href="#fa-چیزی-که-apg-اضافه-میکند">#</a></h4>
 <p>ترکیب زیر طراحی APG است:</p>
 <pre class="code-block" dir="ltr"><code class="language-text">Governance
-+ Project Definition
-+ Hierarchical Instructions
-+ Policies
-+ Workflows
-+ Context
-+ Roles
-+ Evidence / Validation
++ Manifest / Authoritative Source Resolution
++ Authority
++ Scoped Instructions
++ Validation / Evidence
++ Optional Extensions
 + Thin Vendor Adapters
 = Project Governance Contract
 </code></pre>
@@ -1019,23 +988,8 @@ body.theme-dark .theme-toggle{
 <li>Exception Process.</li>
 </ul>
 <h3 class="subsection-title anchor-heading" id="fa-74-projectmd">7.4 <code>PROJECT.md</code><a class="heading-anchor" href="#fa-74-projectmd">#</a></h3>
-<p>تعریف پایدار پروژه است:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Project Name
-Purpose
-Problem Domain
-Primary Users
-Project Type
-Criticality
-Technology / Platform
-Repository Boundaries
-External Dependencies
-Environment Model
-Data Sensitivity
-Deployment / Delivery Model
-Owners
-Known Constraints
-Explicit Non-Goals
-</code></pre>
+<p><code>PROJECT.md</code> یک <strong>Project Source اختیاری</strong> است، نه یک Requirement عمومی APG.</p>
+<p>اگر Sourceهای معتبر پروژه از قبل وجود دارند، Manifest باید همان Sourceها را Reference کند.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-8-governance">8. <code>.governance/</code><a class="heading-anchor" href="#fa-8-governance">#</a></h2>
 <p>این Directory محل Canonical Governance است و به Vendor خاص وابسته نیست.</p>
@@ -1043,16 +997,19 @@ Explicit Non-Goals
 <p>یک Index کوچک Machine-readable است:</p>
 <pre class="code-block" dir="ltr"><code class="language-yaml">spec_version: "1.0"
 
-project:
-  definition: "PROJECT.md"
-
 governance:
   root: "GOVERNANCE.md"
-  entrypoint: "AGENTS.md"
+  entry_adapter: "AGENTS.md"
+
+project_sources:
+  overview:
+    - "README.md"
 
 resolution:
   instruction_file: "AGENTS.md"
   inheritance: "root-to-leaf"
+  source_strategy: "declared-authoritative-sources"
+  context_strategy: "task-relevant-only"
   local_rules_may:
     - specialize
     - restrict
@@ -1060,8 +1017,13 @@ resolution:
     - silently_weaken_parent_policy
     - bypass_required_approval
     - bypass_security_controls
+    - replace_authoritative_sources_without_governance_change
 
-directories:
+core:
+  authority_policy: ".governance/policies/authority.md"
+  validation_policy: ".governance/policies/validation.md"
+
+extensions:
   policies: ".governance/policies"
   workflows: ".governance/workflows"
   context: ".governance/context"
@@ -2155,59 +2117,22 @@ Generated citations must never be invented.
 <p>Again, no software code is required for APG to be useful.</p>
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-110-what-a-new-user-actually-does">1.10 What a New User Actually Does<a class="heading-anchor" href="#en-110-what-a-new-user-actually-does">#</a></h3>
-<p>A first-time user should not copy the entire APG reference repository into their project.</p>
-<p>Start with five steps.</p>
-<h4 class="anchor-heading minor-title" id="en-step-1-describe-the-project">Step 1 — Describe the project<a class="heading-anchor" href="#en-step-1-describe-the-project">#</a></h4>
-<p>Create:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">PROJECT.md
-</code></pre>
-<p>Write:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">What is this project?
-What does it produce?
-Who uses it?
-Who owns it?
-What systems or processes does it depend on?
-What is explicitly out of scope?
-</code></pre>
-<h4 class="anchor-heading minor-title" id="en-step-2-define-authority-and-non-negotiable-rules">Step 2 — Define authority and non-negotiable rules<a class="heading-anchor" href="#en-step-2-define-authority-and-non-negotiable-rules">#</a></h4>
-<p>Create:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">GOVERNANCE.md
-</code></pre>
-<p>Write:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">What may an AI agent do without approval?
-What requires human approval?
-What must never happen?
-What rules cannot be overridden by a local instruction?
-What evidence is required before work is accepted?
-</code></pre>
-<h4 class="anchor-heading minor-title" id="en-step-3-add-the-entry-point">Step 3 — Add the entry point<a class="heading-anchor" href="#en-step-3-add-the-entry-point">#</a></h4>
-<p>Create:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">AGENTS.md
-</code></pre>
-<p>Its job is to route the agent to the canonical project contract and applicable scoped instructions.</p>
-<p>Do not put the entire project into this file.</p>
-<h4 class="anchor-heading minor-title" id="en-step-4-add-only-the-governance-components-you-need">Step 4 — Add only the governance components you need<a class="heading-anchor" href="#en-step-4-add-only-the-governance-components-you-need">#</a></h4>
-<p>For a small project:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">.governance/
-├── manifest.yaml
-├── policies/
-│   └── validation.md
-└── workflows/
-    └── default.md
-</code></pre>
-<p>Add more only when the project actually needs them.</p>
-<h4 class="anchor-heading minor-title" id="en-step-5-add-scoped-instructions-when-the-project-grows">Step 5 — Add scoped instructions when the project grows<a class="heading-anchor" href="#en-step-5-add-scoped-instructions-when-the-project-grows">#</a></h4>
-<p>Example:</p>
+<p>A first-time user should not copy the full APG reference repository into a consuming project.</p>
+<p>Install only the APG core that is needed and declare existing authoritative project sources through the manifest.</p>
+<h4 class="anchor-heading minor-title" id="en-minimal-core">Minimal Core<a class="heading-anchor" href="#en-minimal-core">#</a></h4>
 <pre class="code-block" dir="ltr"><code class="language-text">project/
 ├── AGENTS.md
-├── frontend/
-│   └── AGENTS.md
-├── backend/
-│   └── AGENTS.md
-└── infrastructure/
-    └── AGENTS.md
+├── GOVERNANCE.md
+└── .governance/
+    ├── manifest.yaml
+    └── policies/
+        ├── authority.md
+        └── validation.md
 </code></pre>
-<p>Each child file explains only what is different in that subtree.</p>
+<p><code>PROJECT.md</code> is optional. The manifest should reference existing authoritative project-native sources.</p>
+<h4 class="anchor-heading minor-title" id="en-agents-router"><code>AGENTS.md</code><a class="heading-anchor" href="#en-agents-router">#</a></h4>
+<p>This file is the entry point and router into governance, the manifest, scoped instructions, and relevant authoritative sources.</p>
+<p><strong>Optional Extensions:</strong> Workflows, context helpers, roles, templates, additional policies, and profiles are added only when needed.</p>
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-111-the-same-framework-across-different-professions">1.11 The Same Framework Across Different Professions<a class="heading-anchor" href="#en-111-the-same-framework-across-different-professions">#</a></h3>
 <p>The following table shows how APG concepts translate across domains.</p>
@@ -2392,8 +2317,8 @@ What evidence is required before work is accepted?
 <td>Who has authority and what rules cannot be violated?</td>
 </tr>
 <tr>
-<td>Project Definition</td>
-<td>What is this project and what are its boundaries?</td>
+<td>Project Sources</td>
+<td>Where do authoritative project facts live?</td>
 </tr>
 <tr>
 <td>Policy</td>
@@ -2484,13 +2409,11 @@ https://geminicli.com/docs/reference/memport/</li>
 <h4 class="anchor-heading minor-title" id="en-apg-specific-synthesis">APG-specific synthesis<a class="heading-anchor" href="#en-apg-specific-synthesis">#</a></h4>
 <p>The following architecture is an APG design decision rather than a vendor standard:</p>
 <pre class="code-block" dir="ltr"><code class="language-text">Governance
-+ Project Definition
-+ Hierarchical Instructions
-+ Policies
-+ Workflows
-+ Context
-+ Roles
-+ Evidence/Validation
++ Manifest / Authoritative Source Resolution
++ Authority
++ Scoped Instructions
++ Validation / Evidence
++ Optional Extensions
 + Thin Vendor Adapters
 = Project Governance Contract
 </code></pre>
@@ -2654,29 +2577,8 @@ What happens when required evidence is unavailable?
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-84-projectmd">8.4 <code>PROJECT.md</code><a class="heading-anchor" href="#en-84-projectmd">#</a></h3>
 <h4 class="anchor-heading minor-title" id="en-purpose-4">Purpose<a class="heading-anchor" href="#en-purpose-4">#</a></h4>
-<p>Stable definition of the project itself.</p>
-<h4 class="anchor-heading minor-title" id="en-contains-3">Contains<a class="heading-anchor" href="#en-contains-3">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">Project Name
-Purpose
-Problem Domain
-Primary Users
-Project Type
-Criticality
-Technology / Platform
-Repository Boundaries
-External Dependencies
-Environment Model
-Data Sensitivity
-Deployment / Delivery Model
-Owners
-Known Constraints
-Explicit Non-Goals
-</code></pre>
-<h4 class="anchor-heading minor-title" id="en-must-avoid">Must avoid<a class="heading-anchor" href="#en-must-avoid">#</a></h4>
-<p>Highly volatile runtime status.</p>
-<p>Fast-changing state belongs in scoped context such as:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">.governance/context/current-state.md
-</code></pre>
+<p><code>PROJECT.md</code> is an <strong>optional project source</strong>, not a universal APG requirement.</p>
+<p>If authoritative project-native sources already exist, the manifest should reference them.</p>
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-85-changelogmd">8.5 <code>CHANGELOG.md</code><a class="heading-anchor" href="#en-85-changelogmd">#</a></h3>
 <p>Tracks framework releases and specification changes.</p>
@@ -2726,16 +2628,19 @@ Explicit Non-Goals
 <h4 class="anchor-heading minor-title" id="en-v10-manifest-shape">v1.0 manifest shape<a class="heading-anchor" href="#en-v10-manifest-shape">#</a></h4>
 <pre class="code-block" dir="ltr"><code class="language-yaml">spec_version: "1.0"
 
-project:
-  definition: "PROJECT.md"
-
 governance:
   root: "GOVERNANCE.md"
-  entrypoint: "AGENTS.md"
+  entry_adapter: "AGENTS.md"
+
+project_sources:
+  overview:
+    - "README.md"
 
 resolution:
   instruction_file: "AGENTS.md"
   inheritance: "root-to-leaf"
+  source_strategy: "declared-authoritative-sources"
+  context_strategy: "task-relevant-only"
   local_rules_may:
     - specialize
     - restrict
@@ -2743,8 +2648,13 @@ resolution:
     - silently_weaken_parent_policy
     - bypass_required_approval
     - bypass_security_controls
+    - replace_authoritative_sources_without_governance_change
 
-directories:
+core:
+  authority_policy: ".governance/policies/authority.md"
+  validation_policy: ".governance/policies/validation.md"
+
+extensions:
   policies: ".governance/policies"
   workflows: ".governance/workflows"
   context: ".governance/context"

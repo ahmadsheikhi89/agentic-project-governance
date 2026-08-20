@@ -1,5 +1,5 @@
 # AGENTS.md
 
-Read `GOVERNANCE.md` and `PROJECT.md`, then follow `.governance/workflows/default.md`.
+Read `GOVERNANCE.md` and `.governance/manifest.yaml`.
 
-Validate results using `.governance/policies/validation.md`.
+Resolve authoritative project sources from the manifest, follow the applicable authority policy, and validate results using `.governance/policies/validation.md`.
