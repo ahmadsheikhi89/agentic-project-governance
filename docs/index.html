@@ -377,6 +377,55 @@ body.theme-dark .theme-toggle{
     monospace;
 }
 
+
+
+/* APG Mermaid Diagrams v1 */
+.mermaid-card {
+  margin: 28px auto;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+}
+
+.mermaid-card .mermaid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 720px;
+  margin: 0;
+  background: transparent;
+}
+
+.mermaid-card svg {
+  display: block;
+  width: 100%;
+  max-width: 980px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.mermaid-card .nodeLabel,
+.mermaid-card .edgeLabel {
+  font-family:
+    "Segoe UI",
+    Tahoma,
+    Arial,
+    sans-serif !important;
+}
+
+@media (max-width: 900px) {
+  .mermaid-card {
+    padding: 14px;
+  }
+
+  .mermaid-card .mermaid {
+    min-width: 680px;
+  }
+}
+
 </style>
 <meta content="Ahmad Sheikhi" name="author"/><meta content="Copyright © 2026 Ahmad Sheikhi" name="copyright"/><meta content="Agentic Project Governance v1.0.0" property="og:title"/><meta content="A vendor-neutral, repository-native governance model for humans and AI agents." property="og:description"/><meta content="website" property="og:type"/><meta content="https://apg.opspro.ir/" property="og:url"/><meta content="summary" name="twitter:card"/><meta content="Agentic Project Governance v1.0.0" name="twitter:title"/><meta content="Project governance for humans and AI agents." name="twitter:description"/><link href="https://apg.opspro.ir/" rel="canonical"/></head>
 <body>
@@ -407,7 +456,7 @@ body.theme-dark .theme-toggle{
 <div class="hero-meta">
 <span>فارسی + English</span>
 <span>Markdown + YAML</span>
-<span>Runtime dependency: none</span>
+<span>Diagram runtime: Mermaid v11</span>
 <span>Initial public release</span>
 <span>Light / Dark theme</span><span>Release: v1.0.0</span><span>apg.opspro.ir</span></div>
 </div>
@@ -438,15 +487,32 @@ body.theme-dark .theme-toggle{
 <li>و در پایان چه چیزی باید تحویل داده شود.</li>
 </ul>
 <p>خلاصه ایده:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Existing Project
-├── Authoritative Project Sources
-└── APG Governance Layer
-    ├── Governance
-    ├── Manifest / Source Resolution
-    ├── Authority
-    ├── Validation / Evidence
-    └── Tool Adapters
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p><strong>ابزار AI ممکن است عوض شود؛ قرارداد پروژه باید پایدار بماند.</strong></p>
 <hr/>
 <h3 class="subsection-title anchor-heading" id="fa-11-مدل-ذهنی-ساده">1.1 مدل ذهنی ساده<a class="heading-anchor" href="#fa-11-مدل-ذهنی-ساده">#</a></h3>
@@ -547,68 +613,89 @@ body.theme-dark .theme-toggle{
 <li>Rollback چگونه باید ثبت شود.</li>
 </ul>
 <p>ساختار نمونه:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">infra-automation/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── .governance/
-│   ├── policies/
-│   │   ├── authority.md
-│   │   ├── change-control.md
-│   │   ├── security.md
-│   │   └── validation.md
-│   ├── workflows/
-│   │   ├── implementation.md
-│   │   ├── canary-change.md
-│   │   └── handover.md
-│   └── context/
-│       ├── architecture.md
-│       ├── environments.md
-│       └── conventions.md
-├── ansible/
-│   └── AGENTS.md
-├── kubernetes/
-│   └── AGENTS.md
-└── ci/
-    └── AGENTS.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Workflow نمونه:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Scope
-→ Precheck
-→ Canary
-→ Approval
-→ Apply
-→ Validate
-→ Report
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>در این مدل، AI فقط Automation تولید نمی‌کند؛ <strong>روش درست کار در این پروژه را هم می‌فهمد.</strong></p>
 <hr/>
 <h3 class="subsection-title anchor-heading" id="fa-22-software-engineering">2.2 Software Engineering<a class="heading-anchor" href="#fa-22-software-engineering">#</a></h3>
 <p>در یک پروژه Software ممکن است Frontend، Backend، API، Test و Release هرکدام Rule متفاوت داشته باشند.</p>
-<pre class="code-block" dir="ltr"><code class="language-text">product-platform/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── .governance/
-│   ├── policies/
-│   │   ├── security.md
-│   │   ├── validation.md
-│   │   └── documentation.md
-│   ├── workflows/
-│   │   ├── implementation.md
-│   │   ├── review.md
-│   │   └── release.md
-│   └── context/
-│       ├── architecture.md
-│       ├── api-contracts.md
-│       └── conventions.md
-├── frontend/
-│   └── AGENTS.md
-├── backend/
-│   └── AGENTS.md
-└── tests/
-    └── AGENTS.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Root Governance می‌تواند بگوید:</p>
 <ul>
 <li>تغییر User-facing باید Test داشته باشد؛</li>
@@ -619,26 +706,32 @@ body.theme-dark .theme-toggle{
 <hr/>
 <h3 class="subsection-title anchor-heading" id="fa-23-human-resources">2.3 Human Resources<a class="heading-anchor" href="#fa-23-human-resources">#</a></h3>
 <p>در HR، مسئله اصلی Deployment نیست؛ <strong>Privacy، Fairness، معیارهای استخدام و مالک تصمیم نهایی</strong> مهم‌اند.</p>
-<pre class="code-block" dir="ltr"><code class="language-text">recruitment-operations/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── .governance/
-│   ├── policies/
-│   │   ├── privacy.md
-│   │   ├── fairness.md
-│   │   ├── authority.md
-│   │   └── documentation.md
-│   ├── workflows/
-│   │   ├── job-description.md
-│   │   ├── candidate-screening.md
-│   │   ├── interview-review.md
-│   │   └── onboarding.md
-│   └── roles/
-│       ├── recruiter.md
-│       ├── hiring-manager.md
-│       └── reviewer.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Governance می‌تواند روشن کند:</p>
 <ul>
 <li>AI می‌تواند Candidate Material را خلاصه کند؛</li>
@@ -650,40 +743,59 @@ body.theme-dark .theme-toggle{
 <hr/>
 <h3 class="subsection-title anchor-heading" id="fa-24-مهندسی-صنایع-و-بهبود-فرایند">2.4 مهندسی صنایع و بهبود فرایند<a class="heading-anchor" href="#fa-24-مهندسی-صنایع-و-بهبود-فرایند">#</a></h3>
 <p>APG برای Process Improvement هم کاربرد دارد.</p>
-<pre class="code-block" dir="ltr"><code class="language-text">process-improvement/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── .governance/
-│   ├── policies/
-│   │   ├── data-quality.md
-│   │   ├── safety.md
-│   │   ├── validation.md
-│   │   └── change-control.md
-│   ├── workflows/
-│   │   ├── process-study.md
-│   │   ├── root-cause-analysis.md
-│   │   ├── improvement-proposal.md
-│   │   └── standard-work-update.md
-│   └── context/
-│       ├── process-map.md
-│       ├── equipment.md
-│       ├── constraints.md
-│       └── kpi-definitions.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Workflow نمونه:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Define Scope
-→ Verify Source Data
-→ Map Current Process
-→ Identify Bottleneck
-→ Analyze Root Cause
-→ Propose Improvement
-→ Review Safety Impact
-→ Pilot
-→ Measure Result
-→ Update Standard Work
-→ Handover
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>APG در اینجا مشخص می‌کند:</p>
 <ul>
 <li>کدام داده معتبر است؛</li>
@@ -695,24 +807,32 @@ body.theme-dark .theme-toggle{
 <hr/>
 <h3 class="subsection-title anchor-heading" id="fa-25-business-operations">2.5 Business Operations<a class="heading-anchor" href="#fa-25-business-operations">#</a></h3>
 <p>برای کارهایی مثل Purchasing، Vendor Onboarding، Approval، Escalation و Service Request هم می‌توان از همین ساختار استفاده کرد.</p>
-<pre class="code-block" dir="ltr"><code class="language-text">business-operations/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-└── .governance/
-    ├── policies/
-    │   ├── authority.md
-    │   ├── financial-controls.md
-    │   └── documentation.md
-    ├── workflows/
-    │   ├── vendor-onboarding.md
-    │   ├── purchasing.md
-    │   └── escalation.md
-    └── roles/
-        ├── requester.md
-        ├── approver.md
-        └── operator.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>مثلاً:</p>
 <ul>
 <li>AI می‌تواند Purchase Request را Draft کند؛</li>
@@ -723,29 +843,32 @@ body.theme-dark .theme-toggle{
 </ul>
 <hr/>
 <h3 class="subsection-title anchor-heading" id="fa-26-data-و-analytics">2.6 Data و Analytics<a class="heading-anchor" href="#fa-26-data-و-analytics">#</a></h3>
-<pre class="code-block" dir="ltr"><code class="language-text">analytics-platform/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── .governance/
-│   ├── policies/
-│   │   ├── data-access.md
-│   │   ├── privacy.md
-│   │   ├── validation.md
-│   │   └── metric-governance.md
-│   ├── workflows/
-│   │   ├── pipeline-change.md
-│   │   ├── dashboard-review.md
-│   │   └── metric-definition.md
-│   └── context/
-│       ├── data-model.md
-│       ├── source-systems.md
-│       └── metric-catalog.md
-├── pipelines/
-│   └── AGENTS.md
-└── dashboards/
-    └── AGENTS.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>در این حوزه:</p>
 <div class="table-wrap"><table>
 <thead>
@@ -776,25 +899,32 @@ body.theme-dark .theme-toggle{
 <hr/>
 <h3 class="subsection-title anchor-heading" id="fa-27-research-و-documentation">2.7 Research و Documentation<a class="heading-anchor" href="#fa-27-research-و-documentation">#</a></h3>
 <p>حتی Repository بدون کد هم می‌تواند از APG استفاده کند.</p>
-<pre class="code-block" dir="ltr"><code class="language-text">research-project/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── .governance/
-│   ├── policies/
-│   │   ├── source-quality.md
-│   │   ├── citation.md
-│   │   └── review.md
-│   ├── workflows/
-│   │   ├── research.md
-│   │   ├── fact-check.md
-│   │   └── publication.md
-│   └── context/
-│       ├── terminology.md
-│       ├── research-scope.md
-│       └── known-sources.md
-└── reports/
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Ruleهای نمونه:</p>
 <ul>
 <li>Claim باید Source قابل رهگیری داشته باشد؛</li>
@@ -808,15 +938,32 @@ body.theme-dark .theme-toggle{
 <p>برای شروع، کل Reference Repository را Copy نکنید.</p>
 <p>یک پروژه مصرف‌کننده فقط Core موردنیاز APG را اضافه می‌کند و منابع معتبر موجود پروژه را از طریق Manifest معرفی می‌کند.</p>
 <h3 class="subsection-title anchor-heading" id="fa-31-minimal-core">3.1 Minimal Core<a class="heading-anchor" href="#fa-31-minimal-core">#</a></h3>
-<pre class="code-block" dir="ltr"><code class="language-text">project/
-├── AGENTS.md
-├── GOVERNANCE.md
-└── .governance/
-    ├── manifest.yaml
-    └── policies/
-        ├── authority.md
-        └── validation.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p><code>PROJECT.md</code> اختیاری است. Manifest باید Sourceهای معتبر موجود پروژه را Reference کند.</p>
 <h3 class="subsection-title anchor-heading" id="fa-33-agentsmd">3.3 <code>AGENTS.md</code><a class="heading-anchor" href="#fa-33-agentsmd">#</a></h3>
 <p>این فایل Entry Point و Router است و Agent را به Governance، Manifest، Scoped Instructions و منابع معتبر مرتبط با Task هدایت می‌کند.</p>
@@ -828,8 +975,32 @@ body.theme-dark .theme-toggle{
 <h3 class="subsection-title anchor-heading" id="fa-42-governance-با-prompt-فرق-دارد">4.2 Governance با Prompt فرق دارد<a class="heading-anchor" href="#fa-42-governance-با-prompt-فرق-دارد">#</a></h3>
 <p>Rule پایدار باید داخل Repository باشد، نه در Chat History یا Prompt موقت.</p>
 <h3 class="subsection-title anchor-heading" id="fa-43-هر-نوع-اطلاعات-جای-خودش-را-دارد">4.3 هر نوع اطلاعات جای خودش را دارد<a class="heading-anchor" href="#fa-43-هر-نوع-اطلاعات-جای-خودش-را-دارد">#</a></h3>
-<pre class="code-block" dir="ltr"><code class="language-text">Policy != Context != Workflow != Role != Task
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -927,98 +1098,60 @@ body.theme-dark .theme-toggle{
 </ul>
 <h4 class="anchor-heading minor-title" id="fa-چیزی-که-apg-اضافه-میکند">چیزی که APG اضافه می‌کند<a class="heading-anchor" href="#fa-چیزی-که-apg-اضافه-میکند">#</a></h4>
 <p>ترکیب زیر طراحی APG است:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Governance
-+ Manifest / Authoritative Source Resolution
-+ Authority
-+ Scoped Instructions
-+ Validation / Evidence
-+ Optional Extensions
-+ Thin Vendor Adapters
-= Project Governance Contract
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-6-ساختار-reference-repository">6. ساختار Reference Repository<a class="heading-anchor" href="#fa-6-ساختار-reference-repository">#</a></h2>
-<pre class="code-block" dir="ltr"><code class="language-text">agentic-project-governance/
-├── README.md
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── SECURITY.md
-├── LICENSE
-│
-├── .governance/
-│   ├── README.md
-│   ├── manifest.yaml
-│   ├── policies/
-│   │   ├── authority.md
-│   │   ├── change-control.md
-│   │   ├── security.md
-│   │   ├── validation.md
-│   │   └── documentation.md
-│   ├── workflows/
-│   │   ├── default.md
-│   │   ├── implementation.md
-│   │   ├── review.md
-│   │   └── handover.md
-│   ├── context/
-│   │   ├── architecture.md
-│   │   ├── conventions.md
-│   │   ├── glossary.md
-│   │   └── current-state.md
-│   ├── roles/
-│   │   ├── contributor.md
-│   │   ├── reviewer.md
-│   │   └── operator.md
-│   └── templates/
-│       ├── task.md
-│       ├── decision.md
-│       ├── report.md
-│       └── handover.md
-│
-├── adapters/
-│   ├── README.md
-│   ├── codex/
-│   │   └── AGENTS.md.template
-│   ├── claude/
-│   │   └── CLAUDE.md.template
-│   ├── gemini/
-│   │   └── GEMINI.md.template
-│   └── copilot/
-│       └── copilot-instructions.md.template
-│
-├── profiles/
-│   ├── README.md
-│   ├── generic/
-│   ├── software/
-│   └── devops/
-│
-├── examples/
-│   ├── README.md
-│   ├── minimal/
-│   ├── monorepo/
-│   └── operations/
-│
-├── docs/
-│   ├── architecture.md
-│   ├── governance-model.md
-│   ├── instruction-resolution.md
-│   ├── authoring-guide.md
-│   ├── adapter-model.md
-│   ├── extension-model.md
-│   └── prior-art.md
-│
-├── tools/
-│   ├── init-project.sh
-│   └── validate-project.sh
-│
-└── .github/
-    ├── ISSUE_TEMPLATE/
-    │   ├── bug.yml
-    │   └── proposal.yml
-    └── PULL_REQUEST_TEMPLATE.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-7-قرارداد-فایلهای-اصلی">7. قرارداد فایل‌های اصلی<a class="heading-anchor" href="#fa-7-قرارداد-فایلهای-اصلی">#</a></h2>
 <h3 class="subsection-title anchor-heading" id="fa-71-readmemd">7.1 <code>README.md</code><a class="heading-anchor" href="#fa-71-readmemd">#</a></h3>
@@ -1116,45 +1249,117 @@ validation:
 <li><code>documentation.md</code>: مستندات لازم بعد از Change.</li>
 </ul>
 <p>نمونه Change Class:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">READ_ONLY
-LOW_RISK_CHANGE
-REVERSIBLE_CHANGE
-HIGH_IMPACT_CHANGE
-DESTRUCTIVE_CHANGE
-PRODUCTION_CHANGE
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-10-workflows">10. Workflows<a class="heading-anchor" href="#fa-10-workflows">#</a></h2>
 <p>Workflow می‌گوید <strong>کار با چه ترتیب استانداردی انجام شود</strong>.</p>
 <p>Workflow Governance را Override نمی‌کند.</p>
 <h4 class="anchor-heading minor-title" id="fa-default">Default<a class="heading-anchor" href="#fa-default">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">Scope
-→ Inspect
-→ Resolve Context
-→ Plan
-→ Execute
-→ Validate
-→ Report
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <h4 class="anchor-heading minor-title" id="fa-implementation">Implementation<a class="heading-anchor" href="#fa-implementation">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">Understand Requirement
-→ Inspect Existing Project
-→ Identify Applicable Rules
-→ Design Minimum Change
-→ Implement
-→ Validate
-→ Document
-→ Report
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <h4 class="anchor-heading minor-title" id="fa-review">Review<a class="heading-anchor" href="#fa-review">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">Determine Review Scope
-→ Load Relevant Policy
-→ Inspect Evidence
-→ Identify Findings
-→ Classify Severity
-→ Verify Material Findings
-→ Report
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <h4 class="anchor-heading minor-title" id="fa-handover">Handover<a class="heading-anchor" href="#fa-handover">#</a></h4>
 <p>حداقل باید مشخص کند:</p>
 <ul>
@@ -1206,102 +1411,200 @@ PRODUCTION_CHANGE
 <h2 class="major-title anchor-heading" id="fa-13-templates">13. Templates<a class="heading-anchor" href="#fa-13-templates">#</a></h2>
 <p>Templateها برای خروجی‌های تکراری استفاده می‌شوند.</p>
 <h4 class="anchor-heading minor-title" id="fa-task">Task<a class="heading-anchor" href="#fa-task">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">Title
-Objective
-Scope
-Inputs
-Constraints
-Authority
-Expected Output
-Validation
-Out of Scope
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <h4 class="anchor-heading minor-title" id="fa-decision">Decision<a class="heading-anchor" href="#fa-decision">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">Decision
-Status
-Context
-Options Considered
-Chosen Option
-Rationale
-Consequences
-Reversal Conditions
-Evidence / References
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <h4 class="anchor-heading minor-title" id="fa-report">Report<a class="heading-anchor" href="#fa-report">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">Scope
-Actions
-Evidence
-Result
-Validation
-Risks
-Unvalidated Items
-Next Action
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <h4 class="anchor-heading minor-title" id="fa-handover-2">Handover<a class="heading-anchor" href="#fa-handover-2">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">Current State
-Completed Work
-Validation Evidence
-Operational Notes
-Known Risks
-Rollback / Recovery
-Pending Work
-Ownership
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-14-agentsmd-سلسلهمراتبی">14. <code>AGENTS.md</code> سلسله‌مراتبی<a class="heading-anchor" href="#fa-14-agentsmd-سلسلهمراتبی">#</a></h2>
 <p>نمونه:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">example-project/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── backend/
-│   ├── AGENTS.md
-│   └── src/
-├── frontend/
-│   ├── AGENTS.md
-│   └── src/
-└── infrastructure/
-    ├── AGENTS.md
-    ├── ansible/
-    │   ├── AGENTS.md
-    │   └── playbooks/
-    └── terraform/
-        ├── AGENTS.md
-        └── modules/
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>برای Task داخل <code>infrastructure/ansible/playbooks/</code>:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Repository Governance
-        ↓
-Root AGENTS.md
-        ↓
-infrastructure/AGENTS.md
-        ↓
-infrastructure/ansible/AGENTS.md
-        ↓
-Applicable Policy
-        ↓
-Applicable Workflow
-        ↓
-Required Context
-        ↓
-Current Task
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>هر Child فقط Ruleهای مخصوص Scope خودش را نگه می‌دارد.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-15-rule-precedence">15. Rule Precedence<a class="heading-anchor" href="#fa-15-rule-precedence">#</a></h2>
 <p>APG بین <strong>Load Order</strong> و <strong>Authority</strong> تفاوت می‌گذارد.</p>
 <p>ترتیب مفهومی:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">1. External Platform / Security Restrictions
-2. Organization-level Mandatory Policy
-3. Repository GOVERNANCE.md
-4. Scoped Protected Policy
-5. Parent Scoped Instructions
-6. Nearest Scoped Instructions
-7. Applicable Workflow
-8. Role Guidance
-9. Current Task Instructions
-10. Framework Defaults
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>اصل مهم:</p>
 <blockquote>
 <p>Rule نزدیک‌تر لزوماً Rule قدرتمندتر نیست.</p>
@@ -1320,36 +1623,62 @@ Current Task
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-17-context-resolution">17. Context Resolution<a class="heading-anchor" href="#fa-17-context-resolution">#</a></h2>
 <p>APG باید Context را مرحله‌ای Resolve کند:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Task
-  ↓
-Determine Working Scope
-  ↓
-Load Root Project Contract
-  ↓
-Find Applicable Scoped Instructions
-  ↓
-Resolve Required Policies
-  ↓
-Select Workflow
-  ↓
-Load Required Role
-  ↓
-Load Only Relevant Context
-  ↓
-Inspect Project Evidence
-  ↓
-Perform Task
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>هدف این است که Agent فقط اطلاعات لازم برای Task فعلی را بگیرد.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-18-validation-و-evidence">18. Validation و Evidence<a class="heading-anchor" href="#fa-18-validation-و-evidence">#</a></h2>
 <p>این مفاهیم یکسان نیستند:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Action
-Result
-Validation
-Evidence
-Claim
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>مثال:</p>
 <ul>
 <li>Action: Configuration تغییر کرد؛</li>
@@ -1393,15 +1722,32 @@ Claim
 <h2 class="major-title anchor-heading" id="fa-19-human-authority">19. Human Authority<a class="heading-anchor" href="#fa-19-human-authority">#</a></h2>
 <p>APG باید مرز Analysis و Action را مشخص کند.</p>
 <p>Classهای نمونه:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">OBSERVE
-PROPOSE
-MODIFY
-EXECUTE
-DEPLOY
-PUBLISH
-DELETE
-APPROVE
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>نمونه:</p>
 <pre class="code-block" dir="ltr"><code class="language-yaml">authority:
   observe:
@@ -1421,144 +1767,301 @@ APPROVE
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-20-vendor-adapters">20. Vendor Adapters<a class="heading-anchor" href="#fa-20-vendor-adapters">#</a></h2>
 <p>Core باید مستقل از Tool باقی بماند.</p>
-<pre class="code-block" dir="ltr"><code class="language-text">                ┌────────────────────────┐
-                │   Project Governance   │
-                │  Canonical Source      │
-                └───────────┬────────────┘
-                            │
-             ┌──────────────┼──────────────┐
-             │              │              │
-             ▼              ▼              ▼
-        Codex Adapter   Claude Adapter  Gemini Adapter
-             │              │              │
-             ▼              ▼              ▼
-        AGENTS.md       CLAUDE.md       GEMINI.md
 
-                            │
-                            ▼
-                     Copilot Adapter
-                            │
-                            ▼
-                copilot-instructions.md
-</code></pre>
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Adapter فقط باید Tool را به Canonical Governance وصل کند.</p>
 <p>نباید Policy را Duplicate یا Governance موازی ایجاد کند.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-21-profiles">21. Profiles<a class="heading-anchor" href="#fa-21-profiles">#</a></h2>
 <p>Profile مجموعه Defaultهای اختیاری برای یک Domain است.</p>
 <p>v1.0:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">generic/
-software/
-devops/
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>آینده:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">data/
-security/
-research/
-documentation/
-product/
-hr/
-legal/
-finance/
-industrial-engineering/
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Profile می‌تواند Policy، Workflow، Role و Template اضافه کند، اما Core Semantics را تغییر نمی‌دهد.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-22-حداقل-adoption">22. حداقل Adoption<a class="heading-anchor" href="#fa-22-حداقل-adoption">#</a></h2>
 <p>یک پروژه واقعی نباید کل Reference Repository را Copy کند.</p>
 <p>حداقل شروع:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">project/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-└── .governance/
-    ├── manifest.yaml
-    ├── policies/
-    │   └── validation.md
-    └── workflows/
-        └── default.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>هر Component فقط زمانی اضافه شود که مسئله واقعی حل کند.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-23-reference-repository-در-برابر-پروژه-واقعی">23. Reference Repository در برابر پروژه واقعی<a class="heading-anchor" href="#fa-23-reference-repository-در-برابر-پروژه-واقعی">#</a></h2>
 <p>Reference Repository شامل Specification، Example، Profile، Adapter و Tool است.</p>
 <p>اما پروژه مصرف‌کننده فقط بخش‌های موردنیازش را استفاده می‌کند.</p>
-<pre class="code-block" dir="ltr"><code class="language-text">my-api/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── .governance/
-│   ├── manifest.yaml
-│   ├── policies/
-│   │   ├── security.md
-│   │   └── validation.md
-│   └── workflows/
-│       └── implementation.md
-├── src/
-└── tests/
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>هدف APG کم کردن ابهام است، نه زیاد کردن Documentation.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-24-multi-domain-project">24. Multi-Domain Project<a class="heading-anchor" href="#fa-24-multi-domain-project">#</a></h2>
 <p>یک Repository بزرگ می‌تواند چند Scope داشته باشد:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">company-project/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── product/
-│   └── AGENTS.md
-├── software/
-│   ├── AGENTS.md
-│   ├── frontend/
-│   │   └── AGENTS.md
-│   └── backend/
-│       └── AGENTS.md
-├── infrastructure/
-│   ├── AGENTS.md
-│   ├── ansible/
-│   │   └── AGENTS.md
-│   └── kubernetes/
-│       └── AGENTS.md
-├── documentation/
-│   └── AGENTS.md
-└── hr/
-    └── AGENTS.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>هر Subtree Rule خودش را دارد و Governance ریشه را Inherit می‌کند.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-25-versioning">25. Versioning<a class="heading-anchor" href="#fa-25-versioning">#</a></h2>
 <p>مدل پیشنهادی:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">MAJOR.MINOR.PATCH
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>مثال:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">1.0.0
-1.1.0
-2.0.0
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>از <code>1.0.0</code> به بعد، هر Breaking Change در Core Semantics باید Major Version جدید داشته باشد.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-26-security">26. Security<a class="heading-anchor" href="#fa-26-security">#</a></h2>
 <p>Governance File محل Secret نیست.</p>
 <p>این موارد نباید وارد فایل‌های Reusable شوند:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">passwords
-API keys
-private keys
-access tokens
-production credentials
-sensitive personal data
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Governance فقط باید روش Secret Management را Reference کند.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-27-staleness">27. Staleness<a class="heading-anchor" href="#fa-27-staleness">#</a></h2>
 <p>همه اطلاعات طول عمر یکسان ندارند:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Governance       -&gt; slow-changing
-Project identity -&gt; slow-changing
-Architecture     -&gt; medium-changing
-Workflow         -&gt; medium-changing
-Current state    -&gt; fast-changing
-Task             -&gt; temporary
-Evidence         -&gt; execution-specific
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>اطلاعات متغیر باید <code>Last Updated</code> داشته باشند.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-28-authoring-rules">28. Authoring Rules<a class="heading-anchor" href="#fa-28-authoring-rules">#</a></h2>
@@ -1582,12 +2085,32 @@ Evidence         -&gt; execution-specific
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-29-normative-keywords">29. Normative Keywords<a class="heading-anchor" href="#fa-29-normative-keywords">#</a></h2>
 <p>در Specification رسمی می‌توان از این واژه‌ها استفاده کرد:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">MUST
-MUST NOT
-SHOULD
-SHOULD NOT
-MAY
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>معنی دقیق آن‌ها باید در نسخه رسمی مشخص شود.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-30-governance-change">30. Governance Change<a class="heading-anchor" href="#fa-30-governance-change">#</a></h2>
@@ -1612,19 +2135,59 @@ MAY
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-31-decision-records">31. Decision Records<a class="heading-anchor" href="#fa-31-decision-records">#</a></h2>
 <p>تصمیم‌های معماری مهم باید ثبت شوند.</p>
-<pre class="code-block" dir="ltr"><code class="language-text">docs/decisions/
-├── 0001-vendor-neutral-core.md
-├── 0002-agents-as-router.md
-├── 0003-policy-context-separation.md
-└── 0004-root-to-leaf-scope.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>ساختار پیشنهادی:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Status
-Context
-Decision
-Consequences
-Alternatives
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-32-تصمیمهای-اصلی-v10">32. تصمیم‌های اصلی v1.0<a class="heading-anchor" href="#fa-32-تصمیمهای-اصلی-v10">#</a></h2>
 <h3 class="anchor-heading decision-title" id="fa-d-001-vendor-neutral-core">D-001 — Vendor-neutral Core<a class="heading-anchor" href="#fa-d-001-vendor-neutral-core">#</a></h3>
@@ -1650,42 +2213,59 @@ Alternatives
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-33-scope-نسخه-v100">33. Scope نسخه v1.0.0<a class="heading-anchor" href="#fa-33-scope-نسخه-v100">#</a></h2>
 <h4 class="anchor-heading minor-title" id="fa-included">Included<a class="heading-anchor" href="#fa-included">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">README
-GOVERNANCE
-PROJECT
-root AGENTS
-manifest
-core policies
-core workflows
-context examples
-role examples
-templates
-project examples
-vendor adapters
-small bootstrap tool
-structural validator
-architecture documentation
-instruction-resolution documentation
-prior-art documentation
-GitHub contribution files
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <h4 class="anchor-heading minor-title" id="fa-deferred">Deferred<a class="heading-anchor" href="#fa-deferred">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">MCP integration
-agent orchestration
-remote memory
-vector storage
-central policy server
-automatic context embedding
-complex CLI
-Python package
-npm package
-GUI
-SaaS service
-multi-repository federation
-organization policy distribution
-signed governance bundles
-policy-as-code engine
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-34-roadmap">34. Roadmap<a class="heading-anchor" href="#fa-34-roadmap">#</a></h2>
 <h3 class="anchor-heading minor-title" id="fa-v10-initial-public-release">v1.0 — Initial Public Release<a class="heading-anchor" href="#fa-v10-initial-public-release">#</a></h3>
@@ -1709,33 +2289,64 @@ policy-as-code engine
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-35-معیار-موفقیت">35. معیار موفقیت<a class="heading-anchor" href="#fa-35-معیار-موفقیت">#</a></h2>
 <p>اگر یک انسان یا Agent جدید وارد Repository شود، باید بتواند بدون توضیح شفاهی نویسنده اولیه پاسخ این سؤال‌ها را پیدا کند:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">What is this project?
-What am I allowed to do?
-What am I not allowed to do?
-Which rules apply here?
-What context do I need?
-Which workflow should I follow?
-Who owns the decision?
-What evidence is required?
-How do I report the result?
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>اگر این سؤال‌ها پاسخ روشن داشته باشند، پروژه از نظر APG قابل فهم است.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-36-تعریف-یکجملهای">36. تعریف یک‌جمله‌ای<a class="heading-anchor" href="#fa-36-تعریف-یکجملهای">#</a></h2>
 <p><strong>Agentic Project Governance یک ساختار Vendor-neutral و Repository-native است که مشخص می‌کند انسان‌ها و عامل‌های AI چگونه پروژه را بفهمند، تحت چه قواعدی کار کنند، حدود اختیارشان چیست، نتیجه را چگونه اعتبارسنجی کنند و در پایان چه چیزی تحویل دهند.</strong></p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-37-baseline-نسخه-v10">37. Baseline نسخه v1.0<a class="heading-anchor" href="#fa-37-baseline-نسخه-v10">#</a></h2>
-<pre class="code-block" dir="ltr"><code class="language-text">Project name:          Agentic Project Governance
-Canonical directory:  .governance/
-Manifest:              Required
-AGENTS front matter:   Optional
-Roles:                 Included but optional
-Adapters:              Codex, Claude, Gemini, Copilot
-Decision records:      Included
-Tooling:               Small bootstrap + validator
-Runtime dependency:    None
-Core format:           Markdown + YAML
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-38-درباره-نویسنده">38. درباره نویسنده<a class="heading-anchor" href="#fa-38-درباره-نویسنده">#</a></h2>
 <p><strong>احمد شیخی (Ahmad Sheikhi)</strong><br/>
@@ -1763,17 +2374,32 @@ Initial Author &amp; Maintainer — Agentic Project Governance (APG)</p>
 <p>Agentic Project Governance (APG) proposes a small, portable project contract that lives with the repository.</p>
 <p>The framework is not an AI model, agent runtime, orchestration platform, prompt library, or replacement for CI/CD. It is a structure for making a project understandable and governable by humans and AI agents.</p>
 <p>The core idea is:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Project
-├── Governance
-├── Project Definition
-├── Scoped Instructions
-├── Policies
-├── Workflows
-├── Context
-├── Roles
-├── Validation
-└── Tool Adapters
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>A model or tool may change. The project contract should remain.</p>
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-11-start-here-what-this-actually-does">1.1 Start Here — What This Actually Does<a class="heading-anchor" href="#en-11-start-here-what-this-actually-does">#</a></h3>
@@ -1784,30 +2410,62 @@ Initial Author &amp; Maintainer — Agentic Project Governance (APG)</p>
 </blockquote>
 <p>APG gives that information a predictable home inside the repository.</p>
 <p>A project using APG should make it possible for a new human or AI agent to answer:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">What is this project?
-What part of it am I working on?
-Which rules apply here?
-What am I allowed to do?
-What requires approval?
-What information do I need?
-Which workflow should I follow?
-How do I prove the result?
-What do I hand over when I finish?
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>The framework does not decide the business logic for you.</p>
 <p>It gives you a structure in which your own business, engineering, operational, legal, HR, process, or technical rules can be expressed consistently.</p>
 <h4 class="anchor-heading minor-title" id="en-think-of-apg-as-a-project-operating-system">Think of APG as a project operating system<a class="heading-anchor" href="#en-think-of-apg-as-a-project-operating-system">#</a></h4>
 <p>A useful mental model is:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">GOVERNANCE.md  = Constitution
-PROJECT.md     = Project identity card
-AGENTS.md      = Router / entry point
-Policies       = Guardrails
-Workflows      = Runbooks / procedures
-Context        = Knowledge required to understand the work
-Roles          = Responsibility boundaries
-Validation     = Evidence that the result is actually correct
-Adapters       = Translation layer for AI tools
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>The AI model is not the system of record.</p>
 <p>The project repository is.</p>
 <hr/>
@@ -1852,45 +2510,59 @@ Adapters       = Translation layer for AI tools
 <li>how rollback must be documented.</li>
 </ul>
 <h4 class="anchor-heading minor-title" id="en-apg-project-structure">APG project structure<a class="heading-anchor" href="#en-apg-project-structure">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">infra-automation/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── .governance/
-│   ├── policies/
-│   │   ├── authority.md
-│   │   ├── change-control.md
-│   │   ├── security.md
-│   │   └── validation.md
-│   ├── workflows/
-│   │   ├── implementation.md
-│   │   ├── canary-change.md
-│   │   └── handover.md
-│   └── context/
-│       ├── architecture.md
-│       ├── environments.md
-│       └── conventions.md
-├── ansible/
-│   └── AGENTS.md
-├── kubernetes/
-│   └── AGENTS.md
-└── ci/
-    └── AGENTS.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <h4 class="anchor-heading minor-title" id="en-what-the-agent-learns">What the agent learns<a class="heading-anchor" href="#en-what-the-agent-learns">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">Root governance:
-- Production deployment requires approval.
-- Secrets must never be committed.
-- Validation evidence is mandatory.
 
-ansible/AGENTS.md:
-- Reuse existing roles before creating new ones.
-- Syntax-check playbooks before execution.
-- Use exact inventory and limit scope.
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
 
-Workflow:
-Scope → Precheck → Canary → Approval → Apply → Validate → Report
-</code></pre>
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Now the agent is not only capable of generating automation.</p>
 <p>It understands how automation must be produced and operated inside this specific project.</p>
 <hr/>
@@ -1907,45 +2579,114 @@ Scope → Precheck → Canary → Approval → Apply → Validate → Report
 </ul>
 <p>Different teams and agents work on different areas.</p>
 <h4 class="anchor-heading minor-title" id="en-structure">Structure<a class="heading-anchor" href="#en-structure">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">product-platform/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── .governance/
-│   ├── policies/
-│   │   ├── security.md
-│   │   ├── validation.md
-│   │   └── documentation.md
-│   ├── workflows/
-│   │   ├── implementation.md
-│   │   ├── review.md
-│   │   └── release.md
-│   └── context/
-│       ├── architecture.md
-│       ├── api-contracts.md
-│       └── conventions.md
-├── frontend/
-│   └── AGENTS.md
-├── backend/
-│   └── AGENTS.md
-└── tests/
-    └── AGENTS.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <h4 class="anchor-heading minor-title" id="en-example-scoped-behavior">Example scoped behavior<a class="heading-anchor" href="#en-example-scoped-behavior">#</a></h4>
 <p>The root project may define:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">All user-facing changes require tests.
-Secrets must not enter source control.
-Breaking API changes require explicit review.
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>The backend subtree may add:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Use the existing service and repository patterns.
-Do not introduce a new database library without architectural approval.
-API changes must update the API contract.
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>The frontend subtree may instead add:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Reuse the existing design system.
-Accessibility validation is required for new interactive components.
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>One project contract, different local rules.</p>
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-15-example-human-resources-and-recruitment">1.5 Example — Human Resources and Recruitment<a class="heading-anchor" href="#en-15-example-human-resources-and-recruitment">#</a></h3>
@@ -1963,46 +2704,86 @@ Accessibility validation is required for new interactive components.
 <p>The main risk is not deployment.</p>
 <p>The risk is inconsistency, privacy, bias, authority, and unclear decision ownership.</p>
 <h4 class="anchor-heading minor-title" id="en-structure-2">Structure<a class="heading-anchor" href="#en-structure-2">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">recruitment-operations/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── .governance/
-│   ├── policies/
-│   │   ├── privacy.md
-│   │   ├── fairness.md
-│   │   ├── authority.md
-│   │   └── documentation.md
-│   ├── workflows/
-│   │   ├── job-description.md
-│   │   ├── candidate-screening.md
-│   │   ├── interview-review.md
-│   │   └── onboarding.md
-│   ├── context/
-│   │   ├── company-roles.md
-│   │   ├── hiring-criteria.md
-│   │   └── glossary.md
-│   └── roles/
-│       ├── recruiter.md
-│       ├── hiring-manager.md
-│       └── reviewer.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <h4 class="anchor-heading minor-title" id="en-governance-examples">Governance examples<a class="heading-anchor" href="#en-governance-examples">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">AI may summarize candidate material.
-AI may not make the final hiring decision.
-Sensitive candidate data must not be copied into public tools.
-Screening criteria must be job-related and documented.
-Final recommendation ownership belongs to the designated human reviewer.
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>The same APG concepts still work:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Policy
-Workflow
-Context
-Role
-Authority
-Validation
-Handover
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Only the business domain changes.</p>
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-16-example-industrial-engineering-and-process-improvement">1.6 Example — Industrial Engineering and Process Improvement<a class="heading-anchor" href="#en-16-example-industrial-engineering-and-process-improvement">#</a></h3>
@@ -2021,44 +2802,59 @@ Handover
 <li>KPI review.</li>
 </ul>
 <h4 class="anchor-heading minor-title" id="en-structure-3">Structure<a class="heading-anchor" href="#en-structure-3">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">process-improvement/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── .governance/
-│   ├── policies/
-│   │   ├── data-quality.md
-│   │   ├── safety.md
-│   │   ├── validation.md
-│   │   └── change-control.md
-│   ├── workflows/
-│   │   ├── process-study.md
-│   │   ├── root-cause-analysis.md
-│   │   ├── improvement-proposal.md
-│   │   └── standard-work-update.md
-│   ├── context/
-│   │   ├── process-map.md
-│   │   ├── equipment.md
-│   │   ├── constraints.md
-│   │   └── kpi-definitions.md
-│   └── roles/
-│       ├── industrial-engineer.md
-│       ├── process-owner.md
-│       └── safety-reviewer.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <h4 class="anchor-heading minor-title" id="en-example-workflow">Example workflow<a class="heading-anchor" href="#en-example-workflow">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">Define scope
-→ Verify source data
-→ Map current process
-→ Identify bottleneck
-→ Analyze root cause
-→ Propose improvement
-→ Review safety and operational impact
-→ Pilot
-→ Measure result
-→ Update standard work
-→ Handover
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>An AI agent can help calculate, analyze, document, or propose changes, but the project governance defines:</p>
 <ul>
 <li>which measurements are authoritative;</li>
@@ -2082,35 +2878,59 @@ Handover
 <li>operational checklists.</li>
 </ul>
 <h4 class="anchor-heading minor-title" id="en-possible-structure">Possible structure<a class="heading-anchor" href="#en-possible-structure">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">business-operations/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-└── .governance/
-    ├── policies/
-    │   ├── authority.md
-    │   ├── financial-controls.md
-    │   └── documentation.md
-    ├── workflows/
-    │   ├── vendor-onboarding.md
-    │   ├── purchasing.md
-    │   └── escalation.md
-    ├── context/
-    │   ├── approval-matrix.md
-    │   ├── vendors.md
-    │   └── service-catalog.md
-    └── roles/
-        ├── requester.md
-        ├── approver.md
-        └── operator.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>APG can make it explicit that:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">AI may draft a purchase request.
-AI may compare vendor data.
-AI may prepare an approval package.
-AI may not approve its own request.
-AI may not commit financial expenditure without authorized human approval.
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-18-example-data-and-analytics">1.8 Example — Data and Analytics<a class="heading-anchor" href="#en-18-example-data-and-analytics">#</a></h3>
 <h4 class="anchor-heading minor-title" id="en-scenario-6">Scenario<a class="heading-anchor" href="#en-scenario-6">#</a></h4>
@@ -2124,80 +2944,148 @@ AI may not commit financial expenditure without authorized human approval.
 <li>reporting.</li>
 </ul>
 <h4 class="anchor-heading minor-title" id="en-structure-4">Structure<a class="heading-anchor" href="#en-structure-4">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">analytics-platform/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── .governance/
-│   ├── policies/
-│   │   ├── data-access.md
-│   │   ├── privacy.md
-│   │   ├── validation.md
-│   │   └── metric-governance.md
-│   ├── workflows/
-│   │   ├── pipeline-change.md
-│   │   ├── dashboard-review.md
-│   │   └── metric-definition.md
-│   └── context/
-│       ├── data-model.md
-│       ├── source-systems.md
-│       └── metric-catalog.md
-├── pipelines/
-│   └── AGENTS.md
-└── dashboards/
-    └── AGENTS.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>The framework can distinguish:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Business definition of a KPI   → Context / governed metric definition
-Who may change that KPI        → Authority / Policy
-How the pipeline is modified   → Workflow
-How correctness is proven      → Validation
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-19-example-documentation-research-and-knowledge-work">1.9 Example — Documentation, Research, and Knowledge Work<a class="heading-anchor" href="#en-19-example-documentation-research-and-knowledge-work">#</a></h3>
 <p>A non-code repository can also use APG.</p>
 <h4 class="anchor-heading minor-title" id="en-example">Example<a class="heading-anchor" href="#en-example">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">research-project/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── .governance/
-│   ├── policies/
-│   │   ├── source-quality.md
-│   │   ├── citation.md
-│   │   └── review.md
-│   ├── workflows/
-│   │   ├── research.md
-│   │   ├── fact-check.md
-│   │   └── publication.md
-│   └── context/
-│       ├── terminology.md
-│       ├── research-scope.md
-│       └── known-sources.md
-└── reports/
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Possible governance:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Claims require traceable sources.
-Primary sources are preferred.
-Unverified statements must be identified.
-Publication requires human review.
-Generated citations must never be invented.
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Again, no software code is required for APG to be useful.</p>
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-110-what-a-new-user-actually-does">1.10 What a New User Actually Does<a class="heading-anchor" href="#en-110-what-a-new-user-actually-does">#</a></h3>
 <p>A first-time user should not copy the full APG reference repository into a consuming project.</p>
 <p>Install only the APG core that is needed and declare existing authoritative project sources through the manifest.</p>
 <h4 class="anchor-heading minor-title" id="en-minimal-core">Minimal Core<a class="heading-anchor" href="#en-minimal-core">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">project/
-├── AGENTS.md
-├── GOVERNANCE.md
-└── .governance/
-    ├── manifest.yaml
-    └── policies/
-        ├── authority.md
-        └── validation.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p><code>PROJECT.md</code> is optional. The manifest should reference existing authoritative project-native sources.</p>
 <h4 class="anchor-heading minor-title" id="en-agents-router"><code>AGENTS.md</code><a class="heading-anchor" href="#en-agents-router">#</a></h4>
 <p>This file is the entry point and router into governance, the manifest, scoped instructions, and relevant authoritative sources.</p>
@@ -2370,8 +3258,32 @@ Generated citations must never be invented.
 <p>Durable rules belong in governed project files, not in long-lived prompt fragments or chat history.</p>
 <h3 class="subsection-title anchor-heading" id="en-53-separation-of-concerns">5.3 Separation of concerns<a class="heading-anchor" href="#en-53-separation-of-concerns">#</a></h3>
 <p>The framework distinguishes:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Policy != Context != Workflow != Role != Task
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Each category answers a different question:</p>
 <div class="table-wrap"><table>
 <thead>
@@ -2477,104 +3389,61 @@ https://geminicli.com/docs/reference/memport/</li>
 </ul>
 <h4 class="anchor-heading minor-title" id="en-apg-specific-synthesis">APG-specific synthesis<a class="heading-anchor" href="#en-apg-specific-synthesis">#</a></h4>
 <p>The following architecture is an APG design decision rather than a vendor standard:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Governance
-+ Manifest / Authoritative Source Resolution
-+ Authority
-+ Scoped Instructions
-+ Validation / Evidence
-+ Optional Extensions
-+ Thin Vendor Adapters
-= Project Governance Contract
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h2 class="major-title anchor-heading" id="en-7-repository-structure">7. Repository Structure<a class="heading-anchor" href="#en-7-repository-structure">#</a></h2>
 <p>The v1.0 public reference repository is:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">agentic-project-governance/
-├── README.md
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── SECURITY.md
-├── LICENSE
-│
-├── .governance/
-│   ├── README.md
-│   ├── manifest.yaml
-│   │
-│   ├── policies/
-│   │   ├── authority.md
-│   │   ├── change-control.md
-│   │   ├── security.md
-│   │   ├── validation.md
-│   │   └── documentation.md
-│   │
-│   ├── workflows/
-│   │   ├── default.md
-│   │   ├── implementation.md
-│   │   ├── review.md
-│   │   └── handover.md
-│   │
-│   ├── context/
-│   │   ├── architecture.md
-│   │   ├── conventions.md
-│   │   ├── glossary.md
-│   │   └── current-state.md
-│   │
-│   ├── roles/
-│   │   ├── contributor.md
-│   │   ├── reviewer.md
-│   │   └── operator.md
-│   │
-│   └── templates/
-│       ├── task.md
-│       ├── decision.md
-│       ├── report.md
-│       └── handover.md
-│
-├── adapters/
-│   ├── README.md
-│   ├── codex/
-│   │   └── AGENTS.md.template
-│   ├── claude/
-│   │   └── CLAUDE.md.template
-│   ├── gemini/
-│   │   └── GEMINI.md.template
-│   └── copilot/
-│       └── copilot-instructions.md.template
-│
-├── profiles/
-│   ├── README.md
-│   ├── generic/
-│   ├── software/
-│   └── devops/
-│
-├── examples/
-│   ├── README.md
-│   ├── minimal/
-│   ├── monorepo/
-│   └── operations/
-│
-├── docs/
-│   ├── architecture.md
-│   ├── governance-model.md
-│   ├── instruction-resolution.md
-│   ├── authoring-guide.md
-│   ├── adapter-model.md
-│   ├── extension-model.md
-│   └── prior-art.md
-│
-├── tools/
-│   ├── init-project.sh
-│   └── validate-project.sh
-│
-└── .github/
-    ├── ISSUE_TEMPLATE/
-    │   ├── bug.yml
-    │   └── proposal.yml
-    └── PULL_REQUEST_TEMPLATE.md
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h2 class="major-title anchor-heading" id="en-8-root-file-contracts">8. Root File Contracts<a class="heading-anchor" href="#en-8-root-file-contracts">#</a></h2>
 <h3 class="subsection-title anchor-heading" id="en-81-readmemd">8.1 <code>README.md</code><a class="heading-anchor" href="#en-81-readmemd">#</a></h3>
@@ -2635,14 +3504,32 @@ https://geminicli.com/docs/reference/memport/</li>
 <li>governance modification rules.</li>
 </ul>
 <h4 class="anchor-heading minor-title" id="en-example-concerns">Example concerns<a class="heading-anchor" href="#en-example-concerns">#</a></h4>
-<pre class="code-block" dir="ltr"><code class="language-text">Who may approve changes?
-Can an agent deploy?
-Can an agent delete?
-Can an agent publish externally?
-Can lower-level instructions override this rule?
-What validation is mandatory?
-What happens when required evidence is unavailable?
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-84-projectmd">8.4 <code>PROJECT.md</code><a class="heading-anchor" href="#en-84-projectmd">#</a></h3>
 <h4 class="anchor-heading minor-title" id="en-purpose-4">Purpose<a class="heading-anchor" href="#en-purpose-4">#</a></h4>
@@ -2652,14 +3539,32 @@ What happens when required evidence is unavailable?
 <h3 class="subsection-title anchor-heading" id="en-85-changelogmd">8.5 <code>CHANGELOG.md</code><a class="heading-anchor" href="#en-85-changelogmd">#</a></h3>
 <p>Tracks framework releases and specification changes.</p>
 <p>Recommended format:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">## [1.0.0] - 2026-08-18
-### Added
-### Changed
-### Deprecated
-### Removed
-### Fixed
-### Security
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-86-contributingmd">8.6 <code>CONTRIBUTING.md</code><a class="heading-anchor" href="#en-86-contributingmd">#</a></h3>
 <p>Defines how the public community contributes.</p>
@@ -2760,13 +3665,32 @@ validation:
 <h3 class="subsection-title anchor-heading" id="en-102-policieschange-controlmd">10.2 <code>policies/change-control.md</code><a class="heading-anchor" href="#en-102-policieschange-controlmd">#</a></h3>
 <p>Defines change classes and change requirements.</p>
 <p>Possible categories:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">READ_ONLY
-LOW_RISK_CHANGE
-REVERSIBLE_CHANGE
-HIGH_IMPACT_CHANGE
-DESTRUCTIVE_CHANGE
-PRODUCTION_CHANGE
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>The framework does not require every domain to use all categories.</p>
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-103-policiessecuritymd">10.3 <code>policies/security.md</code><a class="heading-anchor" href="#en-103-policiessecuritymd">#</a></h3>
@@ -2818,39 +3742,92 @@ PRODUCTION_CHANGE
 <h3 class="subsection-title anchor-heading" id="en-111-workflowsdefaultmd">11.1 <code>workflows/default.md</code><a class="heading-anchor" href="#en-111-workflowsdefaultmd">#</a></h3>
 <p>Generic lifecycle for work without a specialized workflow.</p>
 <p>Recommended sequence:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Scope
-→ Inspect
-→ Resolve Context
-→ Plan
-→ Execute
-→ Validate
-→ Report
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-112-workflowsimplementationmd">11.2 <code>workflows/implementation.md</code><a class="heading-anchor" href="#en-112-workflowsimplementationmd">#</a></h3>
 <p>Used for creating or changing project artifacts.</p>
 <p>Typical stages:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Understand requirement
-→ Inspect existing project
-→ Identify applicable rules
-→ Design minimum change
-→ Implement
-→ Validate
-→ Document
-→ Report
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-113-workflowsreviewmd">11.3 <code>workflows/review.md</code><a class="heading-anchor" href="#en-113-workflowsreviewmd">#</a></h3>
 <p>Used when evaluating existing work.</p>
 <p>Typical stages:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Determine review scope
-→ Load relevant policy
-→ Inspect evidence
-→ Identify findings
-→ Classify severity
-→ Verify material findings
-→ Report
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>A review should not silently become an implementation task.</p>
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-114-workflowshandovermd">11.4 <code>workflows/handover.md</code><a class="heading-anchor" href="#en-114-workflowshandovermd">#</a></h3>
@@ -2947,112 +3924,236 @@ PRODUCTION_CHANGE
 </ul>
 <p>Projects may define their own roles.</p>
 <p>Examples:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">security-reviewer
-product-owner
-data-steward
-hr-reviewer
-legal-reviewer
-platform-engineer
-sre
-database-operator
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h2 class="major-title anchor-heading" id="en-14-templates">14. Templates<a class="heading-anchor" href="#en-14-templates">#</a></h2>
 <p>Templates standardize recurring artifacts without forcing a domain-specific workflow.</p>
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-141-templatestaskmd">14.1 <code>templates/task.md</code><a class="heading-anchor" href="#en-141-templatestaskmd">#</a></h3>
 <p>Suggested fields:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Title
-Objective
-Scope
-Inputs
-Constraints
-Authority
-Expected Output
-Validation
-Out of Scope
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-142-templatesdecisionmd">14.2 <code>templates/decision.md</code><a class="heading-anchor" href="#en-142-templatesdecisionmd">#</a></h3>
 <p>Suggested fields:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Decision
-Status
-Context
-Options Considered
-Chosen Option
-Rationale
-Consequences
-Reversal Conditions
-Evidence / References
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>This can later evolve into ADR compatibility if desired.</p>
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-143-templatesreportmd">14.3 <code>templates/report.md</code><a class="heading-anchor" href="#en-143-templatesreportmd">#</a></h3>
 <p>Suggested fields:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Scope
-Actions
-Evidence
-Result
-Validation
-Risks
-Unvalidated Items
-Next Action
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h3 class="subsection-title anchor-heading" id="en-144-templateshandovermd">14.4 <code>templates/handover.md</code><a class="heading-anchor" href="#en-144-templateshandovermd">#</a></h3>
 <p>Suggested fields:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Current State
-Completed Work
-Validation Evidence
-Operational Notes
-Known Risks
-Rollback / Recovery
-Pending Work
-Ownership
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <hr/>
 <h2 class="major-title anchor-heading" id="en-15-hierarchical-agentsmd">15. Hierarchical <code>AGENTS.md</code><a class="heading-anchor" href="#en-15-hierarchical-agentsmd">#</a></h2>
 <p>Hierarchical instruction resolution is central to APG.</p>
 <p>Example project:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">example-project/
-├── AGENTS.md
-├── GOVERNANCE.md
-├── PROJECT.md
-├── backend/
-│   ├── AGENTS.md
-│   └── src/
-├── frontend/
-│   ├── AGENTS.md
-│   └── src/
-└── infrastructure/
-    ├── AGENTS.md
-    ├── ansible/
-    │   ├── AGENTS.md
-    │   └── playbooks/
-    └── terraform/
-        ├── AGENTS.md
-        └── modules/
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>For work inside:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">infrastructure/ansible/playbooks/
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>the effective instruction chain is conceptually:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Repository Governance
-        ↓
-Root AGENTS.md
-        ↓
-infrastructure/AGENTS.md
-        ↓
-infrastructure/ansible/AGENTS.md
-        ↓
-Applicable Policy
-        ↓
-Applicable Workflow
-        ↓
-Required Context
-        ↓
-Current Task
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>A child <code>AGENTS.md</code> should contain only rules and routing information specific to its scope.</p>
 <p>It should not duplicate the root governance document.</p>
 <hr/>
@@ -3095,25 +4196,64 @@ See `architecture.md` in this subtree when the task affects deployment topology.
 <p>APG distinguishes <strong>loading order</strong> from <strong>authority precedence</strong>.</p>
 <p>A tool may load files differently, but the project governance model must explicitly define which instruction wins.</p>
 <p>Recommended conceptual precedence:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">1. External platform / security restrictions
-2. Organization-level mandatory policy
-3. Repository GOVERNANCE.md
-4. Scoped protected policy
-5. Parent scoped instructions
-6. Nearest scoped instructions
-7. Applicable workflow
-8. Role guidance
-9. Current task instructions
-10. Framework defaults
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Important rule:</p>
 <blockquote>
 <p>More specific does not automatically mean more authoritative.</p>
 </blockquote>
 <p>Example:</p>
 <p>A local file may say:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Deployment is allowed from this directory.
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>If root governance requires human approval for production deployment, the local instruction cannot remove that approval requirement.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="en-18-rule-conflict-resolution">18. Rule Conflict Resolution<a class="heading-anchor" href="#en-18-rule-conflict-resolution">#</a></h2>
@@ -3133,56 +4273,117 @@ See `architecture.md` in this subtree when the task affects deployment topology.
 <p>APG uses progressive context resolution.</p>
 <p>The agent should not consume all project documents by default.</p>
 <p>Conceptual resolver:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Task
-  ↓
-Determine working scope
-  ↓
-Load root project contract
-  ↓
-Find applicable scoped instructions
-  ↓
-Resolve required policies
-  ↓
-Select workflow
-  ↓
-Load required role
-  ↓
-Load only relevant context
-  ↓
-Inspect project evidence
-  ↓
-Perform task
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>This is intentionally compatible with the direction of current agent tools that support scoped instructions or on-demand capabilities, while APG's exact resolver is its own framework-level abstraction.</p>
 <hr/>
 <h2 class="major-title anchor-heading" id="en-20-evidence-and-validation-model">20. Evidence and Validation Model<a class="heading-anchor" href="#en-20-evidence-and-validation-model">#</a></h2>
 <p>APG separates:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Action
-Result
-Validation
-Evidence
-Claim
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>These are not interchangeable.</p>
 <p>Example:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">Action:
-Changed configuration.
 
-Result:
-File was modified.
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
 
-Validation:
-Configuration parser completed successfully.
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
 
-Evidence:
-Command exit code = 0 and parser output captured.
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
 
-Claim:
-Syntax validation PASS.
-</code></pre>
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>The agent must not produce:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">PASS
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>when validation was not actually performed.</p>
 <p>Recommended reporting vocabulary:</p>
 <div class="table-wrap"><table>
@@ -3220,15 +4421,32 @@ Syntax validation PASS.
 <h2 class="major-title anchor-heading" id="en-21-human-authority-model">21. Human Authority Model<a class="heading-anchor" href="#en-21-human-authority-model">#</a></h2>
 <p>A core APG concept is an explicit decision boundary between analysis and action.</p>
 <p>Example classes:</p>
-<pre class="code-block" dir="ltr"><code class="language-text">OBSERVE
-PROPOSE
-MODIFY
-EXECUTE
-DEPLOY
-PUBLISH
-DELETE
-APPROVE
-</code></pre>
+
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>A project may map these to human roles.</p>
 <p>Example:</p>
 <pre class="code-block" dir="ltr"><code class="language-yaml">authority:
@@ -3251,26 +4469,32 @@ APPROVE
 <h2 class="major-title anchor-heading" id="en-22-vendor-adapter-model">22. Vendor Adapter Model<a class="heading-anchor" href="#en-22-vendor-adapter-model">#</a></h2>
 <p>The project core is vendor-neutral.</p>
 <p>Adapters translate or route the project contract into the conventions used by a specific tool.</p>
-<pre class="code-block" dir="ltr"><code class="language-text">                ┌────────────────────────┐
-                │   Project Governance   │
-                │  Canonical Source      │
-                └───────────┬────────────┘
-                            │
-             ┌──────────────┼──────────────┐
-             │              │              │
-             ▼              ▼              ▼
-        Codex Adapter   Claude Adapter  Gemini Adapter
-             │              │              │
-             ▼              ▼              ▼
-        AGENTS.md       CLAUDE.md       GEMINI.md
 
-                            │
-                            ▼
-                     Copilot Adapter
-                            │
-                            ▼
-                copilot-instructions.md
-</code></pre>
+<div class="mermaid-card">
+<pre class="mermaid">
+flowchart TB
+    G["APG Canonical Governance"]
+
+    G --> C["Codex Adapter"]
+    G --> CL["Claude Adapter"]
+    G --> GM["Gemini Adapter"]
+    G --> CP["Copilot Adapter"]
+
+    C --> A["AGENTS.md"]
+    CL --> CM["CLAUDE.md"]
+    GM --> GMM["GEMINI.md"]
+    CP --> CI["copilot-instructions.md"]
+
+    classDef governance fill:#123d27,stroke:#38c976,stroke-width:2px,color:#ffffff;
+    classDef adapter fill:#16231b,stroke:#5d876b,stroke-width:1.5px,color:#ffffff;
+    classDef file fill:#0b100d,stroke:#385243,stroke-width:1px,color:#dce8df;
+
+    class G governance;
+    class C,CL,GM,CP adapter;
+    class A,CM,GMM,CI file;
+</pre>
+</div>
+
 <p>Adapters should:</p>
 <ul>
 <li>point to canonical project documents;</li>
@@ -4942,5 +6166,33 @@ themeToggle?.addEventListener('click', () => {
   applyTheme(document.body.classList.contains('theme-dark') ? 'light' : 'dark');
 });
 </script>
+
+
+<script type="module" id="apg-mermaid-runtime">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+mermaid.initialize({
+  startOnLoad: true,
+  securityLevel: "strict",
+  theme: "base",
+  flowchart: {
+    curve: "basis",
+    htmlLabels: true,
+    nodeSpacing: 42,
+    rankSpacing: 58
+  },
+  themeVariables: {
+    primaryColor: "#123d27",
+    primaryTextColor: "#ffffff",
+    primaryBorderColor: "#38c976",
+    lineColor: "#5d876b",
+    secondaryColor: "#16231b",
+    tertiaryColor: "#0b100d",
+    fontFamily: "Segoe UI, Tahoma, Arial, sans-serif",
+    fontSize: "15px"
+  }
+});
+</script>
+
 </body>
 </html>
