@@ -4,7 +4,7 @@
 
 **Name:** Agentic Project Governance  
 **Short name:** APG  
-**Release:** 1.0.0
+**Release:** 1.1.0
 **Website:** https://apg.opspro.ir/  
 **Repository:** https://github.com/ahmadsheikhi89/agentic-project-governance  
 **Initial Author & Maintainer:** Ahmad Sheikhi — Senior DevOps Engineer

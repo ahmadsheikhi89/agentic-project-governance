@@ -3,7 +3,7 @@
 Last Updated: 2026-08-18
 
 ```text
-Release: v1.0.0
+Release: v1.1.0
 Website: https://apg.opspro.ir/
 Publishing source: main:/docs
 License: MIT

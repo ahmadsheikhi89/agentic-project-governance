@@ -2,6 +2,20 @@
 
 All notable changes to Agentic Project Governance are documented here.
 
+## [1.1.0] - 2026-09-10
+
+### Governance contract clarity
+
+- clarified APG as the canonical, human-approved project governance contract;
+- distinguished APG from `AGENTS.md`, vendor adapters, AI agents, MCP servers, CI/CD, IAM/RBAC, and project-management systems;
+- clarified the APG manifest as a machine-readable governance index;
+- defined AI systems as generators and/or consumers rather than governance authorities;
+- clarified repeatable governance interpretation across humans, AI systems, and automation;
+- added authoritative project-source and SDS conflict examples;
+- clarified the intended adoption boundary for medium-to-large, multi-team, regulated, and production-critical environments;
+- documented when APG would create unnecessary governance overhead;
+- preserved the APG v1.0 core semantics, manifest specification, vendor neutrality, and Brownfield-first adoption model.
+
 ## [1.0.0] - 2026-08-19
 
 ### Initial public release

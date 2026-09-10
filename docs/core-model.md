@@ -2,7 +2,9 @@
 
 ## Definition
 
-Agentic Project Governance (APG) is the approved project governance contract: a vendor-neutral, repository-native structure that defines how humans, AI systems, and automation resolve and validate governance for work on a project.
+Agentic Project Governance (APG) is a vendor-neutral, repository-native project governance contract shared between humans and AI systems.
+
+It makes authoritative sources, applicable rules, authority boundaries, and validation requirements explicit and versioned for everyone working on the project.
 
 APG is applied to a project. It is not the project itself, an AI agent, or an executable system.
 
