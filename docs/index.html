@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Agentic Project Governance (APG) v1.0.0 — a vendor-neutral, repository-native governance model for human-AI project work." name="description"/>
+<meta content="Agentic Project Governance (APG) v1.0.0 — a vendor-neutral, repository-native governance contract for human-AI project work." name="description"/>
 <title>Agentic Project Governance v1.0.0 — Ahmad Sheikhi</title>
 <style>
 /* Persian font resolution: use local B Roya when installed. */
@@ -427,7 +427,7 @@ body.theme-dark .theme-toggle{
 }
 
 </style>
-<meta content="Ahmad Sheikhi" name="author"/><meta content="Copyright © 2026 Ahmad Sheikhi" name="copyright"/><meta content="Agentic Project Governance v1.0.0" property="og:title"/><meta content="A vendor-neutral, repository-native governance model for humans and AI agents." property="og:description"/><meta content="website" property="og:type"/><meta content="https://apg.opspro.ir/" property="og:url"/><meta content="summary" name="twitter:card"/><meta content="Agentic Project Governance v1.0.0" name="twitter:title"/><meta content="Project governance for humans and AI agents." name="twitter:description"/><link href="https://apg.opspro.ir/" rel="canonical"/></head>
+<meta content="Ahmad Sheikhi" name="author"/><meta content="Copyright © 2026 Ahmad Sheikhi" name="copyright"/><meta content="Agentic Project Governance v1.0.0" property="og:title"/><meta content="An approved, vendor-neutral, repository-native governance contract for humans and AI systems." property="og:description"/><meta content="website" property="og:type"/><meta content="https://apg.opspro.ir/" property="og:url"/><meta content="summary" name="twitter:card"/><meta content="Agentic Project Governance v1.0.0" name="twitter:title"/><meta content="Different humans and AI systems. One approved project understanding." name="twitter:description"/><link href="https://apg.opspro.ir/" rel="canonical"/></head>
 <body>
 <div class="progress" id="progress"></div>
 <header class="topbar">
@@ -451,8 +451,8 @@ body.theme-dark .theme-toggle{
 <div class="hero-inner">
 <span class="badge">Bilingual Release v1.0.0</span>
 <h1>Agentic Project Governance</h1>
-<p class="fa-line">یک قرارداد روشن داخل Repository برای اینکه انسان و AI بدانند پروژه چیست، چه قواعدی دارد، حدود اختیار کجاست و نتیجه چگونه باید اعتبارسنجی شود.</p>
-<p class="en-line">A vendor-neutral project contract for durable rules, scoped instructions, relevant context, explicit authority, and evidence-based validation.</p>
+<p class="fa-line">انسان‌ها و سیستم‌های AI متفاوت؛ یک درک مصوب از پروژه.</p>
+<p class="en-line">Different humans and AI systems. One approved project understanding.</p>
 <div class="hero-meta">
 <span>فارسی + English</span>
 <span>Markdown + YAML</span>
@@ -472,6 +472,45 @@ body.theme-dark .theme-toggle{
 <strong>نویسنده و نگهدارنده اولیه:</strong> احمد شیخی (Ahmad Sheikhi) — Senior DevOps Engineer<br/>
 <strong>هدف:</strong> ایجاد یک ساختار روشن و مستقل از Vendor برای اینکه انسان‌ها و عامل‌های هوش مصنوعی بتوانند روی یک پروژه با قواعد، Context و روش اعتبارسنجی مشترک کار کنند.</p>
 </blockquote>
+<h3 class="anchor-heading minor-title" id="fa-apg-در-یک-نگاه">APG در یک نگاه<a class="heading-anchor" href="#fa-apg-در-یک-نگاه">#</a></h3>
+<p>APG <strong>قرارداد مصوب حاکمیت پروژه</strong> است: یک چارچوب مستقل از Vendor و Repository-native که مشخص می‌کند منابع، قواعد، اختیار و Validation چگونه تعریف و Resolve شوند. APG روی پروژه اعمال می‌شود؛ خود پروژه، یک Agent یا یک سیستم اجرایی نیست.</p>
+<p>APG یک Governance Contract و Standardization Framework است، نه یک استاندارد رسمی صنعت. این چارچوب روش اعلام و Resolve کردن Governance را استاندارد می‌کند، نه روش کار همه پروژه‌ها را.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>مفهوم</th><th>نقش</th></tr></thead>
+<tbody>
+<tr><td>APG</td><td>قرارداد Canonical و Human-approved حاکمیت پروژه</td></tr>
+<tr><td><code>AGENTS.md</code>، <code>CLAUDE.md</code>، <code>GEMINI.md</code> و Copilot instructions</td><td>Adapter یا نقطه ورود Tool به همان قرارداد؛ هیچ‌کدام خود APG نیستند</td></tr>
+<tr><td><code>.governance/manifest.yaml</code></td><td>Governance Index قابل‌خواندن توسط ماشین که محل Resolve شدن اطلاعات معتبر و قواعد را اعلام می‌کند</td></tr>
+<tr><td>AI Agent، MCP Server و Prompt/System Instructions</td><td>تولیدکننده و/یا مصرف‌کننده، یا ابزار Runtime؛ منبع Governance Authority نیستند</td></tr>
+<tr><td>Project Documentation</td><td>حقیقت پروژه را در منبعی نگه می‌دارد که Manifest آن را معتبر اعلام کرده است</td></tr>
+<tr><td>CI/CD و IAM/RBAC</td><td>کنترل‌ها را اجرا و Evidence تولید می‌کنند؛ APG جایگزین آن‌ها نیست</td></tr>
+<tr><td>Project-management tools</td><td>کار را برنامه‌ریزی و پیگیری می‌کنند؛ APG جایگزین آن‌ها نیست</td></tr>
+</tbody>
+</table></div>
+<p>Manifest نه Agent است، نه MCP Server، Workflow Engine، Prompt، Database، سیستم اجرایی یا Infrastructure Inventory.</p>
+<p>هسته کوچک APG چهار پرسش دارد:</p>
+<pre class="code-block" dir="ltr"><code class="language-text">1. What is authoritative?
+2. Which rules apply here?
+3. What is allowed?
+4. What proves the result?</code></pre>
+<p>این هسته از <strong>Sources، Rules، Authority و Validation / Evidence</strong> تشکیل می‌شود و باید Explicit، Repeatable، Verifiable، Vendor-neutral، Human-approved و Repository-native بماند.</p>
+<blockquote><p><strong>APG references existing authoritative project facts and owns the governance contract around them.</strong></p></blockquote>
+<p>برای نمونه، یک پروژه می‌تواند <code>docs/SDS.xlsx</code> را برای Infrastructure Inventory، <code>docs/architecture.md</code> را برای Architecture، <code>VERSION</code> را برای Release Identity و <code>.gitlab-ci.yml</code> را برای Deployment Automation معتبر اعلام کند.</p>
+<pre class="code-block" dir="ltr"><code class="language-text">README.md:      PRD = srv-old
+docs/SDS.xlsx:  PRD = srv-03</code></pre>
+<p>اگر Manifest فایل <code>docs/SDS.xlsx</code> را برای Infrastructure معتبر اعلام کرده باشد، همه مصرف‌کنندگان باید <code>PRD = srv-03</code> را از همان فایل Resolve کنند. Manifest به حقیقت پروژه اشاره می‌کند؛ آن Inventory را کپی نمی‌کند.</p>
+<p>Codex، Claude، Gemini و سایر سیستم‌های AI می‌توانند Discover، Propose، Generate، Consume و Validate کنند، اما خودشان Governance Authority نیستند. انسان یا سازوکار معتبر موجود در سازمان، واقعیت‌ها و تصمیم‌های Authority را Resolve و Approve می‌کند.</p>
+<pre class="code-block" dir="ltr"><code class="language-text">UNRESOLVED:
+Production deployment authority is not defined.
+Human or authoritative-source resolution required.</code></pre>
+<p>Approver نباید حدس زده شود. چرخه ساده عبارت است از:</p>
+<pre class="code-block" dir="ltr"><code class="language-text">Discover → Propose → Human / authoritative resolution
+→ Approve → Record → Validate → Reuse</code></pre>
+<p>APG خروجی متنی یکسان از Toolهای مختلف نمی‌خواهد. با یک قرارداد مصوب مشترک، Fact، Source، Rule، Authority، Validation Requirement و Governance Decision باید یکسان Resolve شوند. بیان متفاوت پذیرفتنی است؛ تفسیر متناقض Governance نیست.</p>
+<p>APG زمانی بیشترین ارزش را دارد که ابهام Governance ریسک عملیاتی ایجاد کند: کسب‌وکارهای متوسط و بزرگ، پروژه‌های چندتیمی، محیط‌های Production-critical یا Regulated، همکاری با Vendor بیرونی، مالکیت و مستندات پراکنده، یا استفاده از چند سیستم AI و Automation.</p>
+<p>APG برای هر Repository لازم نیست. برای پروژه شخصی کوچک، Prototype، آزمایش موقت یا Repository ساده تک‌نفره، <code>README.md</code> یا <code>AGENTS.md</code> ممکن است کافی باشد. صرف استفاده از AI دلیل Adoption نیست.</p>
+<p>APG به GitFlow، Jira، Kubernetes، GitHub، GitLab، Vendor خاص AI، SDS یا ساختار سازمانی خاصی نیاز ندارد.</p>
+<blockquote><p><strong>APG should be introduced when the cost of ambiguity becomes higher than the cost of governance.</strong></p></blockquote>
 <p><a href="#english-edition">رفتن به نسخه English</a></p>
 <hr/>
 <h2 class="major-title anchor-heading" id="fa-1-apg-چیست؟">1. APG چیست؟<a class="heading-anchor" href="#fa-1-apg-چیست؟">#</a></h2>
@@ -2368,6 +2407,45 @@ Initial Author &amp; Maintainer — Agentic Project Governance (APG)</p>
 <strong>Guide revision:</strong> <code>2026-08-17</code><br/>
 <strong>Primary goal:</strong> Define a vendor-neutral, repository-native governance structure for human–AI project work.</p>
 </blockquote>
+<h3 class="anchor-heading minor-title" id="en-apg-at-a-glance">APG at a Glance<a class="heading-anchor" href="#en-apg-at-a-glance">#</a></h3>
+<p>APG is the <strong>approved project governance contract</strong>: a vendor-neutral, repository-native framework that defines how sources, rules, authority, and validation are declared and resolved. APG is applied to a project; it is not the project, an agent, or an executable system.</p>
+<p>APG is a governance contract and standardization framework, not an official industry standard. It standardizes how governance is declared and resolved, not how every project must operate.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Concept</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>APG</td><td>The canonical, human-approved project governance contract</td></tr>
+<tr><td><code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>GEMINI.md</code>, and Copilot instructions</td><td>Tool-facing adapters or entry points into the same contract; none is APG itself</td></tr>
+<tr><td><code>.governance/manifest.yaml</code></td><td>A machine-readable governance index declaring where authoritative information and rules are resolved from</td></tr>
+<tr><td>AI agent, MCP server, and prompt/system instructions</td><td>Generators and/or consumers, or runtime tools; they are not the governance authority</td></tr>
+<tr><td>Project documentation</td><td>Holds project truth where the manifest declares it authoritative</td></tr>
+<tr><td>CI/CD and IAM/RBAC</td><td>Enforce controls and produce evidence; APG does not replace them</td></tr>
+<tr><td>Project-management tools</td><td>Plan and track work; APG does not replace them</td></tr>
+</tbody>
+</table></div>
+<p>The manifest is not an agent, MCP server, workflow engine, prompt, database, executable system, or infrastructure inventory.</p>
+<p>The small APG core answers four questions:</p>
+<pre class="code-block" dir="ltr"><code class="language-text">1. What is authoritative?
+2. Which rules apply here?
+3. What is allowed?
+4. What proves the result?</code></pre>
+<p>That core is <strong>Sources, Rules, Authority, and Validation / Evidence</strong>. It is designed to remain explicit, repeatable, verifiable, vendor-neutral, human-approved, and repository-native.</p>
+<blockquote><p><strong>APG references existing authoritative project facts and owns the governance contract around them.</strong></p></blockquote>
+<p>For example, a project might declare <code>docs/SDS.xlsx</code> authoritative for infrastructure inventory, <code>docs/architecture.md</code> for architecture, <code>VERSION</code> for release identity, and <code>.gitlab-ci.yml</code> for deployment automation.</p>
+<pre class="code-block" dir="ltr"><code class="language-text">README.md:      PRD = srv-old
+docs/SDS.xlsx:  PRD = srv-03</code></pre>
+<p>If the manifest declares <code>docs/SDS.xlsx</code> authoritative for infrastructure, every consumer must resolve <code>PRD = srv-03</code> from that file. The manifest references project truth; it does not copy the inventory.</p>
+<p>Codex, Claude, Gemini, and other AI systems may discover, propose, generate, consume, and validate. They are not themselves the governance authority. Humans or existing authoritative organizational mechanisms resolve and approve organizational facts and authority decisions.</p>
+<pre class="code-block" dir="ltr"><code class="language-text">UNRESOLVED:
+Production deployment authority is not defined.
+Human or authoritative-source resolution required.</code></pre>
+<p>Do not infer an approver. The simple lifecycle is:</p>
+<pre class="code-block" dir="ltr"><code class="language-text">Discover → Propose → Human / authoritative resolution
+→ Approve → Record → Validate → Reuse</code></pre>
+<p>APG does not require identical prose from different tools. Given the same approved contract, consumers should resolve the same fact, source, rule, authority, validation requirement, and governance decision. Different wording is acceptable; contradictory governance interpretation is not.</p>
+<p>APG is most useful where governance ambiguity creates operational risk: medium-sized businesses, larger organizations, multi-team projects, production-critical or regulated environments, external-vendor work, distributed documentation and ownership, or environments using multiple AI systems and automation tools.</p>
+<p>APG is not for every repository. A <code>README.md</code> or <code>AGENTS.md</code> may be sufficient for a small personal project, prototype, temporary experiment, or simple single-developer repository. AI use alone is not a reason to adopt APG.</p>
+<p>APG does not require GitFlow, Jira, Kubernetes, GitHub, GitLab, any specific AI vendor, an SDS, or any specific organizational structure.</p>
+<blockquote><p><strong>APG should be introduced when the cost of ambiguity becomes higher than the cost of governance.</strong></p></blockquote>
 <hr/>
 <h2 class="major-title anchor-heading" id="en-1-executive-summary">1. Executive Summary<a class="heading-anchor" href="#en-1-executive-summary">#</a></h2>
 <p>Modern AI coding and work agents already support persistent project instructions, scoped instructions, reusable skills, and repository context. The problem is that each tool exposes these capabilities differently, and projects often mix policy, project knowledge, workflow instructions, role behavior, and task context into one large prompt or one vendor-specific file.</p>

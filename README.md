@@ -1,8 +1,10 @@
 # Agentic Project Governance (APG)
 
-**Repository-native governance for human and AI project work.**
+**Different humans and AI systems. One approved project understanding.**
 
-Agentic Project Governance (APG) is a vendor-neutral governance contract that lives inside a repository. It makes project authority, applicable rules, authoritative sources, and validation requirements explicit for humans and AI agents.
+Agentic Project Governance (APG) is a vendor-neutral, repository-native governance contract applied to a project. It standardizes how project governance is declared and resolved so that humans, AI systems, and automation can work from the same approved understanding.
+
+APG is a governance contract and standardization framework. It is **not** an official industry standard, and it does not prescribe how every project must operate.
 
 **Website:** https://apg.opspro.ir/  
 **Release:** `v1.0.0`  
@@ -10,11 +12,37 @@ Agentic Project Governance (APG) is a vendor-neutral governance contract that li
 
 ---
 
-## What APG is
+## APG at a glance
 
 APG is applied **to a project**. It is not the project itself.
 
-It answers four core questions:
+| Concept | What it is | Relationship to APG |
+|---|---|---|
+| **APG** | The canonical, human-approved project governance contract | Declares how sources, rules, authority, and validation are resolved |
+| **`AGENTS.md`** | A tool-facing entry point and scoped instruction adapter | Routes compatible tools into the APG contract; it is not APG itself |
+| **`CLAUDE.md`, `GEMINI.md`, Copilot instructions** | Vendor- or tool-facing instruction adapters | Point different tools to the same canonical contract |
+| **APG manifest** | A machine-readable governance index | Declares where authoritative project information and governance rules are resolved from |
+| **AI agent** | Generator and/or consumer that may discover, propose, generate, consume, or validate | Operates under the contract; it is not the governance authority |
+| **MCP server** | A runtime integration that exposes tools or data | May help a consumer act; it is not APG or the manifest |
+| **Prompt or system instructions** | Runtime guidance for a model or tool | May carry or reference APG instructions, but do not replace the approved contract |
+| **Project documentation** | Project facts, decisions, and technical knowledge | Remains authoritative where the manifest declares it authoritative |
+| **CI/CD** | Build, test, deployment, and enforcement automation | Can enforce controls and produce evidence declared by APG |
+| **IAM/RBAC** | Runtime identity and access control | Enforces permissions; APG documents authority boundaries but does not grant access |
+| **Project-management tools** | Systems for planning and tracking work | May contain project records; APG does not replace them |
+
+In short:
+
+```text
+APG                                      = canonical governance contract
+AGENTS.md / CLAUDE.md / GEMINI.md        = tool-facing adapters or entry points
+.governance/manifest.yaml                = machine-readable governance index
+```
+
+The manifest is not an agent, MCP server, workflow engine, prompt, database, executable system, or infrastructure inventory.
+
+## Four core questions
+
+APG makes four answers explicit:
 
 ```text
 1. What is authoritative?
@@ -23,70 +51,98 @@ It answers four core questions:
 4. What proves the result?
 ```
 
-APG keeps those answers versioned with the repository so that humans and tools such as Codex, Claude Code, Gemini, or Copilot can work from the same project contract.
-
-## What APG is not
-
-APG is not:
-
-- an AI model or agent runtime;
-- a replacement for Codex, Claude Code, Gemini, or Copilot;
-- a CI/CD or infrastructure-as-code engine;
-- a project-management system;
-- a mandatory source-code generator;
-- a knowledge dump;
-- an IAM, RBAC, or security-enforcement system.
-
-Runtime tools enforce controls. APG declares the project governance contract they should operate under.
-
-## Core model
+Its small core is:
 
 ```text
-Existing Project
-│
-├── source / docs / CI / IaC / runbooks / specs
-│
-└── APG governance layer
-    ├── Governance
-    ├── Authority
-    ├── Source & rule resolution
-    ├── Validation
-    └── Evidence requirements
-             │
-             ├── AGENTS.md -> Codex adapter / entry
-             ├── CLAUDE.md -> Claude adapter
-             ├── GEMINI.md -> Gemini adapter
-             └── other consumers
+Sources
+Rules
+Authority
+Validation / Evidence
 ```
 
-The project remains the source of its own project facts. APG points to authoritative project sources instead of requiring them to be duplicated under APG directories.
+Core properties are **explicit**, **repeatable**, **verifiable**, **vendor-neutral**, **human-approved**, and **repository-native**.
 
-## Minimal adoption
+## Reference project truth; do not duplicate it
 
-A consuming project does **not** need the full reference repository.
+> **APG references existing authoritative project facts and owns the governance contract around them.**
 
-A minimal APG installation can be:
+The project remains the source of its own facts. APG declares which existing sources are authoritative instead of requiring those facts to be copied into a second knowledge base.
+
+For a realistic system design specification (SDS), a manifest might resolve project facts from:
+
+| Source | Authoritative for |
+|---|---|
+| `docs/SDS.xlsx` | Infrastructure inventory |
+| `docs/architecture.md` | Architecture |
+| `VERSION` | Release and version identity |
+| `.gitlab-ci.yml` | Deployment automation |
+
+Suppose the repository contains a conflict:
 
 ```text
-my-project/
-├── AGENTS.md
-├── GOVERNANCE.md
-└── .governance/
-    ├── manifest.yaml
-    └── policies/
-        ├── authority.md
-        └── validation.md
+README.md:      PRD = srv-old
+docs/SDS.xlsx:  PRD = srv-03
 ```
 
-`AGENTS.md` is an adapter/router for agent tools. The canonical governance remains in the APG contract.
+If the APG manifest declares `docs/SDS.xlsx` authoritative for infrastructure, every consumer must resolve the production infrastructure fact from `docs/SDS.xlsx`: `PRD = srv-03`. APG does not copy that inventory into the manifest; the manifest points to its approved source.
 
-`PROJECT.md` is **not mandatory** for consuming projects. If a project already has `README.md`, architecture documentation, specifications, runbooks, or other authoritative sources, the manifest can reference those existing files.
+## Human authority and AI consumers
 
-## Brownfield first
+Codex, Claude, Gemini, Copilot, and other AI systems may discover, propose, generate, consume, and validate. They are not themselves the governance authority.
 
-APG should work on an existing repository without forcing a reorganization.
+Humans or existing authoritative organizational mechanisms resolve and approve organizational facts and authority decisions. Unknown facts must not be invented. For example:
 
-Example:
+```text
+UNRESOLVED:
+Production deployment authority is not defined.
+Human or authoritative-source resolution required.
+```
+
+Do not infer an approver.
+
+A simple governance lifecycle is:
+
+```text
+Discover
+→ Propose
+→ Human / authoritative resolution
+→ Approve
+→ Record
+→ Validate
+→ Reuse
+```
+
+## Repeatable governance, not identical prose
+
+APG does not require different tools to produce identical natural-language output. Given the same approved APG contract, consumers should resolve the same:
+
+- fact;
+- source;
+- rule;
+- authority;
+- validation requirement;
+- governance decision.
+
+Different wording is acceptable. Contradictory governance interpretation is not.
+
+## Who APG is for
+
+APG is most useful where governance ambiguity creates operational risk, particularly in:
+
+- medium-sized businesses and larger organizations;
+- multi-team projects;
+- production-critical or regulated environments;
+- external-vendor environments;
+- projects with distributed documentation and ownership;
+- environments using multiple AI systems or automation tools.
+
+APG is **not for every repository**. For a small personal project, prototype, temporary experiment, or simple single-developer repository, `README.md` or `AGENTS.md` may be sufficient. AI use alone is not a reason to adopt APG.
+
+> **APG should be introduced when the cost of ambiguity becomes higher than the cost of governance.**
+
+## Brownfield-first adoption
+
+APG should work on an existing repository without forcing a reorganization:
 
 ```text
 existing-project/
@@ -102,34 +158,26 @@ existing-project/
     └── policies/
 ```
 
-APG governs work on that repository. It does not replace its source tree, documentation model, CI/CD, or project-management workflow.
+APG governs work on that repository. It does not replace its source tree, documentation model, CI/CD, project-management workflow, or existing organizational authority.
 
-## Core vs optional extensions
+A minimal adoption can be:
 
-**Core:**
+```text
+my-project/
+├── AGENTS.md
+├── GOVERNANCE.md
+└── .governance/
+    ├── manifest.yaml
+    └── policies/
+        ├── authority.md
+        └── validation.md
+```
 
-- governance semantics;
-- authority;
-- source and rule resolution;
-- validation;
-- evidence requirements;
-- manifest/index.
+`PROJECT.md` is optional. Existing readmes, architecture documents, specifications, runbooks, service catalogs, and version files can remain the authoritative project sources.
 
-**Optional extensions:**
+## Thin, replaceable adapters
 
-- additional policies;
-- workflows;
-- context helpers;
-- roles;
-- templates;
-- profiles;
-- generators and validators.
-
-The reference repository includes optional material because it demonstrates the framework. A consuming project only adopts what it needs.
-
-## Codex and other agents
-
-For Codex, `AGENTS.md` acts as the repository entry/router:
+For Codex, `AGENTS.md` can act as the repository entry point:
 
 ```text
 Codex
@@ -145,13 +193,39 @@ Relevant authoritative project sources
 Applicable policies / validation
 ```
 
-Other tools use thin adapters that point to the same canonical APG contract.
+Other tools can use thin adapters that point to the same contract. Important project governance must not exist only in a vendor-specific adapter.
 
-## Validation integrity
+## Core and optional extensions
 
-APG separates a result from proof of that result.
+**Core:**
 
-Recommended status vocabulary:
+- authoritative project sources;
+- applicable rules and source resolution;
+- authority and approval boundaries;
+- validation and evidence requirements;
+- manifest/index.
+
+**Optional extensions:**
+
+- additional policies;
+- workflows;
+- context helpers;
+- roles;
+- templates;
+- profiles;
+- generators and validators.
+
+The reference repository includes optional material to demonstrate the framework. A consuming project adopts only what it needs.
+
+APG does not require GitFlow, Jira, Kubernetes, GitHub, GitLab, any specific AI vendor, an SDS, or any specific organizational structure.
+
+## Runtime enforcement
+
+APG declares governance. Runtime systems enforce it.
+
+CI/CD approval gates, protected environments, IAM, RBAC, `sudo`, and platform policy controls can enforce permissions and produce evidence. APG does not replace those systems or turn Markdown into access control.
+
+Recommended validation statuses are:
 
 ```text
 PASS
@@ -177,17 +251,7 @@ NOT_VALIDATED
 
 ## Public website
 
-The documentation website is published from:
-
-```text
-main:/docs
-```
-
-Custom domain:
-
-```text
-https://apg.opspro.ir/
-```
+The documentation website is published from `main:/docs` at https://apg.opspro.ir/.
 
 ## License
 
