@@ -16,7 +16,7 @@ Create a public GitHub repository named:
 agentic-project-governance
 ```
 
-Push the `main` branch and the `v1.0.0` tag.
+Push the `main` branch and the intended version tag.
 
 ## 2. Enable GitHub Pages
 

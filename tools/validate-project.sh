@@ -45,8 +45,28 @@ if grep -q 'project_sources:' "$ROOT/.governance/manifest.yaml"; then
 fi
 
 if [ -f "$ROOT/VERSION" ]; then
-  [ "$(tr -d '\r\n' < "$ROOT/VERSION")" = "1.0.0" ]     || fail "VERSION is not 1.0.0"
-  pass "VERSION=1.0.0"
+  version="$(tr -d '\r\n' < "$ROOT/VERSION")"
+
+  printf '%s\n' "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$' \
+    || fail "VERSION is not valid semantic version: $version"
+
+  pass "VERSION=$version"
+
+  manifest_release="$(awk '
+    /^[[:space:]]*release:[[:space:]]*$/ { in_release=1; next }
+    in_release && /^[^[:space:]]/ { in_release=0 }
+    in_release && /^[[:space:]]*current:/ {
+      sub(/^[[:space:]]*current:[[:space:]]*/, "")
+      gsub(/"/, "")
+      print
+      exit
+    }
+  ' "$ROOT/.governance/manifest.yaml")"
+
+  [ "$manifest_release" = "$version" ] \
+    || fail "manifest release.current=$manifest_release does not match VERSION=$version"
+
+  pass "manifest release.current matches VERSION=$version"
 fi
 
 if [ -d "$ROOT/docs" ]; then
@@ -58,4 +78,4 @@ if [ -d "$ROOT/docs" ]; then
   pass "custom domain configured"
 fi
 
-echo "PASS: APG v1.0 core validation complete"
+echo "PASS: APG core validation complete (manifest spec 1.0)"
